@@ -35,14 +35,19 @@ function! s:RemoveWorkspace()
     execute "call delete(expand(\x27" . g:workspace_session_name . "\x27))"
 endfunction
 
+function! s:ToggleWorkspace()
+  if !empty(glob(g:workspace_session_name))
+    call s:RemoveWorkspace()
+  else
+    call s:MakeWorkspace(1)
+  endif
+endfunction
+
 augroup Workspace
   au! VimEnter * call s:LoadWorkspace()
   au! VimLeave * call s:MakeWorkspace(0)
 augroup END
 
-command! MakeWorkspace call s:MakeWorkspace(1)
-command! SaveWorkspace call s:MakeWorkspace(1)
-command! LoadWorkspace call s:LoadWorkspace()
-command! RemoveWorkspace call s:RemoveWorkspace()
+command! ToggleWorkspace call s:ToggleWorkspace()
 
 " vim: ts=2 sw=2 et

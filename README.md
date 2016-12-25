@@ -20,23 +20,15 @@ call plug# end()
 ```
 Once you fire up vim, it will auto-download Plug for you and install the vim-workspace plugin ready for use.
 ## Usage
-The following commands are exposed:
+The following command is exposed:
 
-`MakeWorkspace` - You need to run this to initialize your workspace session.
+`ToggleWorkspace` - This will toggle tracking your workspace, and running it again will delete your workspace.
 
-`SaveWorkspace` - An alias of makeworkspace, and is not necessary.
+Once you make the session, the plugin will automatically update it for you until you toggle it off.
 
-`LoadWorkspace` - Automatically done for you upon opening vim.
+Example binding:
 
-`RemoveWorkspace` - Removes the session file from your working directory.
-
-You only need to create the session (`MakeWorkspace`) when you first start your workspace, and the plugin will take care of persistence for you onwards.
-
-Example bindings:
-```
-nnoremap <leader>m :MakeWorkspace<CR>
-nnoremap <leader>r :RemoveWorkspace<CR>
-```
+`nnoremap <leader>m :ToggleWorkspace<CR>`
 
 You can customize what the session name will be, using the following plugin default as an example:
 
