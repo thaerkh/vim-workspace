@@ -1,6 +1,9 @@
 vim-workspace
 =========
 A minimalist vim session wrapper that will auto update any workspace sessions tied to a working project directory.
+
+![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
+
 ## Installation
 It is recommended that you use Plug to maintain your plugins (https://github.com/junegunn/vim-plug).
 ### Using Plug
