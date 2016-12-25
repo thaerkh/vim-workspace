@@ -32,16 +32,18 @@ The following commands are exposed:
 
 You only need to create the session (`MakeWorkspace`) when you first start your workspace, and the plugin will take care of persistence for you onwards.
 
-It should be rare that you need to use any of the commands above, but feel free to map it to a keybinding for quick access, such as the example below:
+Example bindings:
+```
+nnoremap <leader>m :MakeWorkspace<CR>
+nnoremap <leader>r :RemoveWorkspace<CR>
+```
 
-`nnoremap <leader>m :MakeWorkspace<CR>`
-
-You can customize what the session name will be, using the following default as an example:
+You can customize what the session name will be, using the following plugin default as an example:
 
 `let g:workspace_session_name = '.session.vim'`
 
 If you open vim standalone, it will automatically load the previous session if it exists.
 
-If you open vim with file arguments and a workspace session already exists, the plugin will prompt you for how to proceed. You'll be given an option to overwrite the session, or to load the pre-existing one.
+If you open vim with file arguments and a workspace session already exists, the plugin will prompt you for whether you want to overwrite with the new session or load the pre-existing one.
 ## License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
