@@ -16,11 +16,11 @@ function! s:LoadWorkspace()
     if @% == ''
       execute 'source ' . g:workspace_session_name
     else
-      if input('Override pre-existing workspace with this one? (y/n) ') == 'n'
-        if input('Load pre-existing workspace? (y/n) ') == 'y'
-          bufdo bd
-          execute 'source ' . g:workspace_session_name
-        else
+      if input('Workspace buffer conflict detected. Load pre-existing workspace? (y/n) ') == 'y'
+        bufdo bd
+        execute 'source ' . g:workspace_session_name
+      else
+        if input('Override pre-existing workspace with this one? (y/n) ') == 'n'
           let g:workspace_save_session = 0
         endif
       endif
