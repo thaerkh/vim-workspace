@@ -1,3 +1,8 @@
+" Vim plugin
+" Author:  Thaer Khawaja
+" License: Apache 2.0
+" URL:     https://github.com/thaerkh/vim-workspace
+
 let g:workspace_session_name = get(g:, 'workspace_session_name', '.session.vim')
 
 function! s:MakeWorkspace(workspace_save_session)
