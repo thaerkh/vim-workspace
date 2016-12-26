@@ -5,7 +5,7 @@ A minimalist vim session wrapper that will auto update any workspace sessions ti
 ![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
 
 ## Installation
-It is recommended that you use Plug to maintain your plugins (https://github.com/junegunn/vim-plug).
+This plugin follows the standard runtime path structure, and can be installed with a variety of plugin managers.
 ### Using Plug
 Paste the following in your vimrc:
 ```
