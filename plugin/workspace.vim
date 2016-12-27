@@ -12,7 +12,8 @@ function! s:WorkspaceExists()
 endfunction
 
 function! s:MakeWorkspace(workspace_save_session)
-  if a:workspace_save_session == 1 || get(g:, 'workspace_save_session', 1) == 1
+  if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 1) == 1
+    let s:workspace_save_session = 1
     execute 'mksession! ' . g:workspace_session_name
   endif
 endfunction
@@ -28,24 +29,24 @@ function! s:LoadWorkspace()
         execute 'source ' . g:workspace_session_name
       else
         if input('Override pre-existing workspace with this one? (y/n) ') == 'n'
-          let g:workspace_save_session = 0
+          let s:workspace_save_session = 0
         endif
       endif
     endif
   else
-    let g:workspace_save_session = 0
+    let s:workspace_save_session = 0
   endif
 endfunction
 
 function! s:RemoveWorkspace()
-    let g:workspace_save_session  = 0
+    let s:workspace_save_session  = 0
     execute "call delete(expand(\x27" . g:workspace_session_name . "\x27))"
 endfunction
 
 function! s:ToggleWorkspace()
   if s:WorkspaceExists()
     call s:RemoveWorkspace()
-    execute 'silent !rm -r ' . g:workspace_undodir
+    execute 'silent !rm -rf ' . g:workspace_undodir
     redraw!
     echo 'Workspace removed!'
   else
