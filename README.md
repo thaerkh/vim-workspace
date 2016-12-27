@@ -1,6 +1,6 @@
 vim-workspace
 =========
-A minimalist vim session wrapper that will auto update any workspace sessions tied to a working project directory.
+A minimalist Vim session wrapper that will auto update any workspace sessions tied to a working project directory.
 
 ![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
 
@@ -18,24 +18,25 @@ call plug# begin('~/.vim/plugged')
 Plug 'thaerkh/vim-workspace'
 call plug# end()
 ```
-Once you fire up vim, it will auto-download Plug for you and install the vim-workspace plugin ready for use.
+Once you fire up Vim, it will auto-download Plug for you and install the vim-workspace plugin ready for use.
 ## Usage
-The following command is exposed:
+### Persistent Workspace
+The following is an example binding for the `ToggleWorkspace` command, which when toggled on will track your session, until it's toggled off.
+```
+nnoremap <leader>m :ToggleWorkspace<CR>
+```
+If you open Vim with file arguments and a workspace session already exists, the plugin will prompt you for whether you want to overwrite with the new session or load the pre-existing one.
 
-`ToggleWorkspace` - This will toggle tracking your workspace, and running it again will delete your workspace.
+The following session name is the configurable default, if you wish to change it:
+```
+let g:workspace_session_name = '.session.vim'
+```
+### Persistent Undo History
 
-Once you make the session, the plugin will automatically update it for you until you toggle it off.
-
-Example binding:
-
-`nnoremap <leader>m :ToggleWorkspace<CR>`
-
-You can customize what the session name will be, using the following plugin default as an example:
-
-`let g:workspace_session_name = '.session.vim'`
-
-If you open vim standalone, it will automatically load the previous session if it exists.
-
-If you open vim with file arguments and a workspace session already exists, the plugin will prompt you for whether you want to overwrite with the new session or load the pre-existing one.
+File undo history is persisted across sessions, without needing to keep Vim on. The following are the configurable defaults:
+```
+let g:workspace_persist_undo_history = 1
+let g:workspace_undodir='.undodir'
+```
 ## License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)

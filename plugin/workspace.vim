@@ -4,6 +4,12 @@
 " URL:     https://github.com/thaerkh/vim-workspace
 
 let g:workspace_session_name = get(g:, 'workspace_session_name', '.session.vim')
+let g:workspace_undodir = get(g:, 'workspace_undodir', '.undodir')
+let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history', 1)
+
+function! s:WorkspaceExists()
+  return filereadable(g:workspace_session_name)
+endfunction
 
 function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(g:, 'workspace_save_session', 1) == 1
@@ -12,7 +18,8 @@ function! s:MakeWorkspace(workspace_save_session)
 endfunction
 
 function! s:LoadWorkspace()
-  if !empty(glob(g:workspace_session_name))
+  if s:WorkspaceExists()
+    call s:SetUndoDir()
     if @% == ''
       execute 'source ' . g:workspace_session_name
     else
@@ -36,10 +43,23 @@ function! s:RemoveWorkspace()
 endfunction
 
 function! s:ToggleWorkspace()
-  if !empty(glob(g:workspace_session_name))
+  if s:WorkspaceExists()
     call s:RemoveWorkspace()
+    execute 'silent !rm -r ' . g:workspace_undodir
+    redraw!
   else
     call s:MakeWorkspace(1)
+    call s:SetUndoDir()
+  endif
+endfunction
+
+function! s:SetUndoDir()
+  if g:workspace_persist_undo_history
+    if !isdirectory(g:workspace_undodir)
+      call mkdir(g:workspace_undodir)
+    endif
+    execute 'set undodir=' . resolve(g:workspace_undodir)
+    set undofile
   endif
 endfunction
 

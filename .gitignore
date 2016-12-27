@@ -1,2 +1,3 @@
 *.swp
 .session.vim
+.undodir
