@@ -66,7 +66,7 @@ endfunction
 function! s:SetAutosave()
   if g:workspace_autosave
     execute 'set updatetime=' . resolve(g:workspace_autosave_updatetime)
-    au! CursorHold,CursorHoldI,InsertLeave * silent write
+    au! CursorHold,CursorHoldI,InsertLeave * silent! write
   endif
 endfunction
 
