@@ -47,9 +47,11 @@ function! s:ToggleWorkspace()
     call s:RemoveWorkspace()
     execute 'silent !rm -r ' . g:workspace_undodir
     redraw!
+    echo 'Workspace removed!'
   else
     call s:MakeWorkspace(1)
     call s:SetUndoDir()
+    echo 'Workspace created!'
   endif
 endfunction
 
