@@ -33,7 +33,7 @@ let g:workspace_session_name = '.session.vim'
 ```
 ### Persistent Undo History
 
-File undo history is persisted across workspace sessions, without needing to keep Vim on.
+When in a workspace, file undo history and cursor position is persisted between sessions, without needing to keep Vim on.
 
 The following are configurable defaults:
 ```
