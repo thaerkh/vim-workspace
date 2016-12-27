@@ -6,6 +6,8 @@
 let g:workspace_session_name = get(g:, 'workspace_session_name', '.session.vim')
 let g:workspace_undodir = get(g:, 'workspace_undodir', '.undodir')
 let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history', 1)
+let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
+let g:workspace_autosave_updatetime = get(g:, 'workspace_autosave_updatetime', 1000)
 
 function! s:WorkspaceExists()
   return filereadable(g:workspace_session_name)
@@ -20,7 +22,7 @@ endfunction
 
 function! s:LoadWorkspace()
   if s:WorkspaceExists()
-    call s:SetUndoDir()
+    call s:ConfigureWorkspace()
     if @% == ''
       execute 'source ' . g:workspace_session_name
     else
@@ -38,6 +40,11 @@ function! s:LoadWorkspace()
   endif
 endfunction
 
+function! s:ConfigureWorkspace()
+    call s:SetUndoDir()
+    call s:SetAutosave()
+endfunction
+
 function! s:RemoveWorkspace()
     let s:workspace_save_session  = 0
     execute "call delete(expand(\x27" . g:workspace_session_name . "\x27))"
@@ -51,8 +58,15 @@ function! s:ToggleWorkspace()
     echo 'Workspace removed!'
   else
     call s:MakeWorkspace(1)
-    call s:SetUndoDir()
+    call s:ConfigureWorkspace()
     echo 'Workspace created!'
+  endif
+endfunction
+
+function! s:SetAutosave()
+  if g:workspace_autosave
+    execute 'set updatetime=' . resolve(g:workspace_autosave_updatetime)
+    au! CursorHold,CursorHoldI,InsertLeave * silent write
   endif
 endfunction
 

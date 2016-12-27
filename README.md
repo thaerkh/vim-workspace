@@ -40,5 +40,14 @@ The following are configurable defaults:
 let g:workspace_persist_undo_history = 1
 let g:workspace_undodir='.undodir'
 ```
+### Autosave
+Being in a workspace also enables an autosave feature that saves the buffer if a cursor is idle for the allotted updatetime, or if exiting insert mode.
+
+These are the configurable defaults:
+```
+let g:workspace_autosave = 1
+let g:workspace_autosave_updatetime = 1000
+```
+
 ## License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
