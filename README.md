@@ -1,6 +1,6 @@
 vim-workspace
 =========
-A minimalist Vim session wrapper that will auto update any workspace sessions tied to a working project directory.
+A minimalist Vim session and undofile history wrapper plugin for seamlessly keeping track of your project workspace.
 
 ![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
 
@@ -10,8 +10,8 @@ This plugin follows the standard runtime path structure, and can be installed wi
 Paste the following in your vimrc:
 ```
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    autocmd VimEnter * PlugInstall
+  silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall
 endif
 
 call plug# begin('~/.vim/plugged')
@@ -33,7 +33,9 @@ let g:workspace_session_name = '.session.vim'
 ```
 ### Persistent Undo History
 
-File undo history is persisted across sessions, without needing to keep Vim on. The following are the configurable defaults:
+File undo history is persisted across workspace sessions, without needing to keep Vim on.
+
+The following are configurable defaults:
 ```
 let g:workspace_persist_undo_history = 1
 let g:workspace_undodir='.undodir'
