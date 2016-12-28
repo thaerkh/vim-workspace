@@ -74,13 +74,13 @@ function! s:LoadWorkspace()
 endfunction
 
 function! s:ConfigureWorkspace()
-    call s:SetUndoDir()
-    call s:SetAutosave()
+  call s:SetUndoDir()
+  call s:SetAutosave()
 endfunction
 
 function! s:RemoveWorkspace()
-    let s:workspace_save_session  = 0
-    execute "call delete(expand(\x27" . g:workspace_session_name . "\x27))"
+  let s:workspace_save_session  = 0
+  execute "call delete(expand(\x27" . g:workspace_session_name . "\x27))"
 endfunction
 
 function! s:ToggleWorkspace()
@@ -108,9 +108,9 @@ endfunction
 function! s:SetAutosave()
   if g:workspace_autosave
     execute 'set updatetime=' . resolve(g:workspace_autosave_updatetime)
-    if &modifiable
+    augroup Workspace
       au! BufLeave,CursorHold,FocusLost,InsertLeave,TabLeave,WinLeave * call s:UntrailSpaces() | silent! write
-    endif
+    augroup END
   endif
 endfunction
 
