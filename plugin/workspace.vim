@@ -59,7 +59,7 @@ function! s:LoadWorkspace()
     if @% == ''
       execute 'source ' . g:workspace_session_name
     else
-      if input('A workspace already exists! load session? (y/n) ') == 'y'
+      if input('A workspace exists! Would you like to load it? (y/n) ') != 'n'
         bufdo bd
         execute 'source ' . g:workspace_session_name
       else
