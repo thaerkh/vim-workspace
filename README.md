@@ -32,7 +32,7 @@ The following is an example binding for the `ToggleWorkspace` command that will 
 ```
 nnoremap <leader>m :ToggleWorkspace<CR>
 ```
- Once toggled on, your workspace will be seamlessly tracked every time you open vim in your workspace directory, and all vim-workspace features will be enabled. Conversely, toggling the command off will remove all workspace session history and disable the listed plugin features.
+Once toggled on, your workspace will be seamlessly tracked every time you open vim in your workspace directory, and all vim-workspace features will be enabled. Conversely, toggling the command off will remove all workspace session history and disable the listed plugin features.
 
 If you open Vim with file arguments and a workspace session already exists, the plugin will prompt you for whether you want to overwrite with the new session or load the pre-existing one.
 
