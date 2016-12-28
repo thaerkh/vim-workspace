@@ -24,9 +24,7 @@ While not enabled by default, this plugin comes available with common vim settin
 If you would like to enable these settings (viewable in `plugin/workspace.vim`), add and customize the following example to your vimrc:
 ```
 let g:workspace_sensible_settings = 1
-let g:workspace_sensible_shiftwidth = 2
 ```
-The option `g:workspace_sensible_shiftwidth`, if configured, will conveniently set shiftwidth, tabstop, and softabstop to the same value.
 ## Features
 ### Persistent Workspace
 The following is an example binding for the `ToggleWorkspace` command that will make/remove your workspace sessions:

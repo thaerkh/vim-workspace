@@ -10,7 +10,6 @@ let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_updatetime = get(g:, 'workspace_autosave_updatetime', 1000)
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
 let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  " off by default
-let g:workspace_sensible_shiftwidth = get(g:, 'workspace_sensible_shiftwidth', 0)
 
 
 function! s:SetSensibleSettings()
@@ -31,6 +30,7 @@ function! s:SetSensibleSettings()
     set foldmethod=indent
     set nofoldenable
     set incsearch
+    set laststatus=2
     set linebreak
     set number
     set ruler
@@ -38,14 +38,7 @@ function! s:SetSensibleSettings()
     " Editing behaviour
     set autoindent
     set backspace=indent,eol,start
-    let a:sw = g:workspace_sensible_shiftwidth
-    if a:sw
-      execute 'set shiftwidth=' . resolve(a:sw)
-      execute 'set softtabstop=' . resolve(a:sw)
-      execute 'set tabstop=' . resolve(a:sw)
-      set smarttab
-    endif
-
+    set smarttab
   endif
 endfunction
 
