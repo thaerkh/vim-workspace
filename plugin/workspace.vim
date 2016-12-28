@@ -8,6 +8,8 @@ let g:workspace_undodir = get(g:, 'workspace_undodir', '.undodir')
 let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history', 1)
 let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_updatetime = get(g:, 'workspace_autosave_updatetime', 1000)
+let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
+
 
 function! s:WorkspaceExists()
   return filereadable(g:workspace_session_name)
@@ -63,10 +65,21 @@ function! s:ToggleWorkspace()
   endif
 endfunction
 
+function! s:UntrailSpaces()
+  if g:workspace_autosave_untrailspaces
+    let curr_row = line('.')
+    let curr_col = virtcol('.')
+    :%s/\s\+$//e
+    cal cursor(curr_row, curr_col)
+  endif
+endfunction
+
 function! s:SetAutosave()
   if g:workspace_autosave
     execute 'set updatetime=' . resolve(g:workspace_autosave_updatetime)
-    au! CursorHold,CursorHoldI,InsertLeave * silent! write
+    if &modifiable
+      au! BufLeave,CursorHold,FocusLost,InsertLeave,TabLeave,WinLeave * call s:UntrailSpaces() | silent! write
+    endif
   endif
 endfunction
 

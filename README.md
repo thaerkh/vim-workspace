@@ -41,12 +41,13 @@ let g:workspace_persist_undo_history = 1
 let g:workspace_undodir='.undodir'
 ```
 ### File Autosave
-Being in a workspace enables a file autosave feature that saves the buffer if a cursor is idle for the allotted updatetime, or if exiting insert mode.
+Being in a workspace enables the file autosave feature. By default, any trailing whitespace will be untrailed before saving.
 
 These are the configurable defaults:
 ```
 let g:workspace_autosave = 1
 let g:workspace_autosave_updatetime = 1000
+let g:workspace_autosave_untrailspaces = 1
 ```
 
 ## License
