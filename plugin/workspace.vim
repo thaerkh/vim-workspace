@@ -66,7 +66,7 @@ function! s:ToggleWorkspace()
 endfunction
 
 function! s:UntrailSpaces()
-  if g:workspace_autosave_untrailspaces
+  if g:workspace_autosave_untrailspaces && &modifiable
     let curr_row = line('.')
     let curr_col = virtcol('.')
     :%s/\s\+$//e

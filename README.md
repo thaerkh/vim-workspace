@@ -41,7 +41,7 @@ let g:workspace_persist_undo_history = 1
 let g:workspace_undodir='.undodir'
 ```
 ### File Autosave
-Being in a workspace enables the file autosave feature. By default, any trailing whitespace will be untrailed before saving.
+Being in a workspace enables the file autosave feature. By default, it will also untrail/trim any leading spaces.
 
 These are the configurable defaults:
 ```
