@@ -19,34 +19,40 @@ Plug 'thaerkh/vim-workspace'
 call plug# end()
 ```
 Once you fire up Vim, it will auto-download Plug for you and install the vim-workspace plugin ready for use.
-## Usage
+## Features
 ### Persistent Workspace
-The following is an example binding for the `ToggleWorkspace` command, which when toggled on will track your session, until it's toggled off.
+The following is an example binding for the `ToggleWorkspace` command, which when toggled on will track your session and enable all vim-workspace features until the workspace is toggled off.
 ```
 nnoremap <leader>m :ToggleWorkspace<CR>
 ```
 If you open Vim with file arguments and a workspace session already exists, the plugin will prompt you for whether you want to overwrite with the new session or load the pre-existing one.
 
-The following session name is the configurable default, if you wish to change it:
+You can use the following setting if you wish change the default session name:
 ```
 let g:workspace_session_name = '.session.vim'
 ```
 ### Persistent Undo History
 
-When in a workspace, file undo history and cursor position is persisted between sessions, without needing to keep Vim on.
+When in a workspace, file undo history is persisted between sessions, without needing to keep Vim on.
 
-The following are configurable defaults:
+The following settings can be used if you wish to configure the feature:
 ```
 let g:workspace_persist_undo_history = 1
 let g:workspace_undodir='.undodir'
 ```
+### Persistent Cursor positions
+Any files in a workspace session will persist their cursor positions across reloads.
 ### File Autosave
-Being in a workspace enables the file autosave feature. By default, it will also untrail/trim any leading spaces.
+Being in a workspace enables the file autosave feature, which will autosave when leaving insert mode, when idle (as per updatetime), or when switching buffers/tabs.
 
-These are the configurable defaults:
+You can use these settings if you wish to change the default behaviour:
 ```
 let g:workspace_autosave = 1
 let g:workspace_autosave_updatetime = 1000
+```
+### Untrailing Spaces
+By default, all trailing spaces are trimmed before a buffer is autosaved. This behaviour can be configured on/off with the following setting:
+```
 let g:workspace_autosave_untrailspaces = 1
 ```
 
