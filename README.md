@@ -1,32 +1,9 @@
 vim-workspace
 =========
-A simple persistent workspace management plugin that tracks files in your session, their undo history, autosaves, and keeps your code clean of leading spaces.
+A simple persistent workspace management plugin that tracks files in your session, their undo history, autosaves, and keeps your code clean of trailing spaces.
 
 ![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
-
-## Installation
-This plugin follows the standard runtime path structure, and can be installed with a variety of plugin managers.
-### Using Plug
-Paste the following in your `~/.vimrc` file, and things will automatically install upon a vim restart or re-source:
-```
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  autocmd VimEnter * PlugInstall
-endif
-
-call plug# begin('~/.vim/plugged')
-Plug 'thaerkh/vim-workspace'
-call plug# end()
-```
-
-### Sensible Settings
-While not enabled by default, this plugin comes available with common vim settings that most/all people can agree on.
-
-If you would like to enable these settings (viewable in `plugin/workspace.vim`), add the following to your vimrc:
-```
-let g:workspace_sensible_settings = 1
-```
-## Features
+# Features
 ### Persistent Workspace
 Toggling the `ToggleWorkspace` command on will track your workspace session in your terminal's current working directory (i.e a repo's root folder).
 
@@ -65,6 +42,39 @@ let g:workspace_autosave_updatetime = 1000
 By default, all trailing spaces are trimmed before a buffer is autosaved. This behaviour can be configured on/off with the following setting:
 ```
 let g:workspace_autosave_untrailspaces = 1
+```
+### Sensible Settings
+While `not enabled by default`, this plugin comes available with common vim settings that most/all people can agree on.
+
+If you would like to enable these settings (viewable in `plugin/workspace.vim`), add the following to your vimrc:
+```
+let g:workspace_sensible_settings = 1
+```
+
+# Installation
+This plugin follows the standard runtime path structure, and can be installed with a variety of plugin managers.
+### Using Plug
+Paste the following in your `~/.vimrc` file, and things will automatically install upon a vim restart or re-source:
+```
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall
+endif
+
+call plug# begin('~/.vim/plugged')
+Plug 'thaerkh/vim-workspace'
+call plug# end()
+```
+### Using Vundle
+Paste this in your `~./vimrc`:
+```
+Plugin 'thaerkh/vim-workspace'
+```
+### Using Pathogen
+cd into your bundle path and clone the repo:
+```
+cd ~/.vim/bundle
+git clone https://github.com/thaerkh/vim-workspace
 ```
 
 ## License
