@@ -5,7 +5,7 @@ A simple persistent workspace management plugin that tracks files in your sessio
 ![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
 # Features
 ### Persistent Workspace
-Toggling the `ToggleWorkspace` command on will track your workspace session in your terminal's current working directory (i.e a repo's root folder).
+Toggling the `ToggleWorkspace` command on will track your workspace session in your terminal's current working directory, i.e a repo's root folder.
 
 You can bind this command to a convenient shortcut, such as the following mapleader example:
 ```
@@ -13,11 +13,11 @@ nnoremap <leader>m :ToggleWorkspace<CR>
 ```
 Once toggled on, your workspace will be seamlessly tracked every time you open vim in your workspace directory, and all vim-workspace features will be enabled. Conversely, toggling the command off will remove all workspace session history and disable the listed plugin features.
 
-If you open Vim with file arguments and a workspace session already exists, the plugin will prompt you for whether you want to overwrite with the new session or load the pre-existing one.
+If you open Vim with file arguments and a workspace session already exists, you'll be prompted to whether or not you'd like to load it.
 
 You can use the following setting if you wish change the default session name:
 ```
-let g:workspace_session_name = '.session.vim'
+let g:workspace_session_name = 'Session.vim'
 ```
 ### Persistent Undo History
 

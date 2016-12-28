@@ -3,7 +3,7 @@
 " License: Apache 2.0
 " URL:     https://github.com/thaerkh/vim-workspace
 
-let g:workspace_session_name = get(g:, 'workspace_session_name', '.session.vim')
+let g:workspace_session_name = get(g:, 'workspace_session_name', 'Session.vim')
 let g:workspace_undodir = get(g:, 'workspace_undodir', '.undodir')
 let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history', 1)
 let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
@@ -59,13 +59,11 @@ function! s:LoadWorkspace()
     if @% == ''
       execute 'source ' . g:workspace_session_name
     else
-      if input('Workspace buffer conflict detected. Load pre-existing workspace? (y/n) ') == 'y'
+      if input('A workspace already exists! load session? (y/n) ') == 'y'
         bufdo bd
         execute 'source ' . g:workspace_session_name
       else
-        if input('Override pre-existing workspace with this one? (y/n) ') == 'n'
-          let s:workspace_save_session = 0
-        endif
+        let s:workspace_save_session = 0
       endif
     endif
   else
