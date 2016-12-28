@@ -1,13 +1,13 @@
 vim-workspace
 =========
-A minimalist Vim session and undofile history wrapper plugin for seamlessly keeping track of your project workspace.
+A simple workspace management plugin that tracks files in your session, their undo history, autosaves, and keeps your code clean of leading spaces.
 
 ![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
 
 ## Installation
 This plugin follows the standard runtime path structure, and can be installed with a variety of plugin managers.
 ### Using Plug
-Paste the following in your vimrc:
+Paste the following in your `~/.vimrc` file, and things will automatically install upon a vim restart or re-source:
 ```
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
@@ -18,7 +18,15 @@ call plug# begin('~/.vim/plugged')
 Plug 'thaerkh/vim-workspace'
 call plug# end()
 ```
-Once you fire up Vim, it will auto-download Plug for you and install the vim-workspace plugin ready for use.
+
+### Sensible Settings
+While not enabled by default, this plugin comes available with common vim settings that most/all people can agree on.
+If you would like to enable these settings (viewable in `plugin/workspace.vim`), add and customize the following example to your vimrc:
+```
+let g:workspace_sensible_settings = 1
+let g:workspace_sensible_shiftwidth = 2
+```
+The option `g:workspace_sensible_shiftwidth`, if configured, will conveniently set shiftwidth, tabstop, and softabstop to the same value.
 ## Features
 ### Persistent Workspace
 The following is an example binding for the `ToggleWorkspace` command that will make/remove your workspace sessions:

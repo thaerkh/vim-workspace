@@ -9,7 +9,45 @@ let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history',
 let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_updatetime = get(g:, 'workspace_autosave_updatetime', 1000)
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
+let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  " off by default
+let g:workspace_sensible_shiftwidth = get(g:, 'workspace_sensible_shiftwidth', 0)
 
+
+function! s:SetSensibleSettings()
+  if g:workspace_sensible_settings
+    " Environment behaviour
+    filetype plugin indent on
+    syntax on
+    set nocompatible
+    set clipboard=unnamedplus
+    set encoding=utf-8
+    set hidden
+    set path+=**
+    set wildmenu
+    set wildmode=list:longest,full
+
+    " Editor view
+    set cursorline
+    set foldmethod=indent
+    set nofoldenable
+    set incsearch
+    set linebreak
+    set number
+    set ruler
+
+    " Editing behaviour
+    set autoindent
+    set backspace=indent,eol,start
+    let a:sw = g:workspace_sensible_shiftwidth
+    if a:sw
+      execute 'set shiftwidth=' . resolve(a:sw)
+      execute 'set softtabstop=' . resolve(a:sw)
+      execute 'set tabstop=' . resolve(a:sw)
+      set smarttab
+    endif
+
+  endif
+endfunction
 
 function! s:WorkspaceExists()
   return filereadable(g:workspace_session_name)
@@ -100,5 +138,7 @@ augroup Workspace
 augroup END
 
 command! ToggleWorkspace call s:ToggleWorkspace()
+
+call s:SetSensibleSettings()
 
 " vim: ts=2 sw=2 et
