@@ -21,7 +21,8 @@ call plug# end()
 
 ### Sensible Settings
 While not enabled by default, this plugin comes available with common vim settings that most/all people can agree on.
-If you would like to enable these settings (viewable in `plugin/workspace.vim`), add and customize the following example to your vimrc:
+
+If you would like to enable these settings (viewable in `plugin/workspace.vim`), add the following to your vimrc:
 ```
 let g:workspace_sensible_settings = 1
 ```
