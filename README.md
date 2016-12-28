@@ -28,7 +28,9 @@ let g:workspace_sensible_settings = 1
 ```
 ## Features
 ### Persistent Workspace
-The following is an example binding for the `ToggleWorkspace` command that will make/remove your workspace sessions:
+Toggling the `ToggleWorkspace` command on will track your workspace session in your terminal's current working directory (i.e a repo's root folder).
+
+You can bind this command to a convenient shortcut, such as the following mapleader example:
 ```
 nnoremap <leader>m :ToggleWorkspace<CR>
 ```
