@@ -1,6 +1,6 @@
 vim-workspace
 =========
-A simple persistent workspace management plugin that tracks files in your session, their undo history, autosaves, and keeps your code clean of trailing spaces.
+This workspace manager persistently tracks files in your session, their undo history, autosaves, and keeps your code clean of trailing spaces.
 
 ![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
 # Features
