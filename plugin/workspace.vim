@@ -131,10 +131,15 @@ function! s:SetUndoDir()
   endif
 endfunction
 
+function! s:PostLoadCleanup()
+  if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  if exists(':AirlineRefresh') | AirlineRefresh | endif
+endfunction
+
 augroup Workspace
   au! VimEnter * call s:LoadWorkspace()
   au! VimLeave * call s:MakeWorkspace(0)
-  au! SessionLoadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
 
 command! ToggleWorkspace call s:ToggleWorkspace()
