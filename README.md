@@ -59,7 +59,7 @@ let g:workspace_sensible_settings = 1
 # Installation
 This plugin follows the standard runtime path structure, and can be installed with a variety of plugin managers.
 ### Using Plug
-Paste the following in your `~/.vimrc` file, and things will automatically install upon a vim restart or re-source:
+Paste the following in your `~/.vimrc` file:
 ```
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
@@ -70,6 +70,11 @@ call plug# begin('~/.vim/plugged')
 Plug 'thaerkh/vim-workspace'
 call plug# end()
 ```
+The if-clause will auto-download Plug for you and install your plugins if it doesn't exist.
+
+If you already have Plug, simply paste `Plug 'thaerkh/vim-workspace'` and call `:PlugInstall` to install the plugin.
+
+Remember to `:PlugUpdate` often to get all the latest features and bug fixes!
 ### Using Vundle
 Paste this in your `~./vimrc`:
 ```
