@@ -14,9 +14,11 @@ You can bind this command to a convenient shortcut, such as the following maplea
 ```
 nnoremap <leader>m :ToggleWorkspace<CR>
 ```
-Once toggled on, your workspace will be seamlessly tracked every time you open Vim (with no commandline file arguments) in your workspace directory, and all vim-workspace features will be enabled. Conversely, toggling the command off will remove all workspace session history and disable the listed plugin features.
+When toggled on, your workspace will be persist every time you open Vim (with no commandline file arguments) in your workspace directory, and all workspace features will be enabled.
 
-If Vim is opened with file arguments and a workspace session already exists, you'll be prompted to load those files into that session. If declined, the workspace will be temporarily disabled and the file buffers load normally.
+Conversely, toggling the command off will remove all workspace session history and disable the listed plugin features.
+
+If Vim is opened with file arguments and a workspace session already exists, you'll be prompted to load those file buffers into that session. If declined, the workspace will be temporarily disabled and the file buffers load separately as if there was no workspace session.
 
 The following default can be configured if you wish to change the session name:
 ```
