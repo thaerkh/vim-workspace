@@ -104,11 +104,21 @@ function! s:UntrailSpaces()
   endif
 endfunction
 
+function! s:Autosave(timed)
+  let current_time = localtime()
+  let s:last_update = get(s:, 'last_update', 0)
+  if a:timed == 0 || (current_time - s:last_update) > 1
+    let s:last_update = current_time
+    call s:UntrailSpaces() | silent! write
+  endif
+endfunction
+
 function! s:SetAutosave()
   if g:workspace_autosave
     set updatetime=1000
     augroup WorkspaceToggle
-      au! BufLeave,CursorHold,FocusLost,InsertLeave,TabLeave,WinLeave * call s:UntrailSpaces() | silent! write
+      au! BufLeave,FocusLost,InsertLeave,TabLeave,WinLeave * call s:Autosave(0)
+      au! CursorHold * call s:Autosave(1)
     augroup END
   endif
 endfunction
