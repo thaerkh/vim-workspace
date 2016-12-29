@@ -1,4 +1,4 @@
-vim-workspace
+<img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/logo.jpg" height="220">
 =========
 This workspace manager persistently tracks files in your session, their undo history, autosaves, and keeps your code clean of trailing spaces.
 
