@@ -36,10 +36,10 @@ Any files in a workspace session will persist their cursor positions across relo
 ### File Autosave
 Being in a workspace enables the file autosave feature, which will autosave when leaving insert mode, when idle (as per updatetime), or when switching buffers/tabs.
 
-You can use these settings if you wish to change the default behaviour:
+The following configurations are defaults that you can customize if you wish to change plugin behaviour:
 ```
 let g:workspace_autosave = 1
-let g:workspace_autosave_updatetime = 1000
+set updatetime=1000
 ```
 ### Untrailing Spaces
 By default, all trailing spaces are trimmed before a buffer is autosaved. This behaviour can be configured on/off with the following setting:

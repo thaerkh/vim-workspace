@@ -7,7 +7,6 @@ let g:workspace_session_name = get(g:, 'workspace_session_name', 'Session.vim')
 let g:workspace_undodir = get(g:, 'workspace_undodir', '.undodir')
 let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history', 1)
 let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
-let g:workspace_autosave_updatetime = get(g:, 'workspace_autosave_updatetime', 1000)
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
 let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  " off by default
 
@@ -106,7 +105,7 @@ endfunction
 
 function! s:SetAutosave()
   if g:workspace_autosave
-    execute 'set updatetime=' . resolve(g:workspace_autosave_updatetime)
+    set updatetime=1000
     augroup WorkspaceToggle
       au! BufLeave,CursorHold,FocusLost,InsertLeave,TabLeave,WinLeave * call s:UntrailSpaces() | silent! write
     augroup END
