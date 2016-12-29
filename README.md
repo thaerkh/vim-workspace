@@ -70,7 +70,7 @@ call plug# begin('~/.vim/plugged')
 Plug 'thaerkh/vim-workspace'
 call plug# end()
 ```
-The if-clause will auto-download Plug for you and install your plugins if it doesn't exist.
+If you don't already have Plug, this will auto-download Plug for you and install the vim-workspace plugin.
 
 If you already have Plug, simply paste `Plug 'thaerkh/vim-workspace'` and call `:PlugInstall` to install the plugin.
 
