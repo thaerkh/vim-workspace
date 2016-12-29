@@ -79,6 +79,7 @@ endfunction
 function! s:RemoveWorkspace()
   let s:workspace_save_session  = 0
   execute "call delete(expand(\x27" . g:workspace_session_name . "\x27))"
+  au! WorkspaceToggle * *
 endfunction
 
 function! s:ToggleWorkspace()
@@ -106,7 +107,7 @@ endfunction
 function! s:SetAutosave()
   if g:workspace_autosave
     execute 'set updatetime=' . resolve(g:workspace_autosave_updatetime)
-    augroup Workspace
+    augroup WorkspaceToggle
       au! BufLeave,CursorHold,FocusLost,InsertLeave,TabLeave,WinLeave * call s:UntrailSpaces() | silent! write
     augroup END
   endif
