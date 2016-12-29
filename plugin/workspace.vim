@@ -58,7 +58,7 @@ function! s:LoadWorkspace()
     if @% == ''
       execute 'source ' . g:workspace_session_name
     else
-      if input('A workspace exists! Would you like to load your selected files into it? (y/n) ') != 'n'
+      if input('A workspace exists! Load your file arguments into it? (y/n) ') != 'n'
         execute 'source ' . g:workspace_session_name
         tabnew
         bfirst
