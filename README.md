@@ -18,7 +18,7 @@ Once toggled on, your workspace will be seamlessly tracked every time you open v
 
 If you open Vim with file arguments and a workspace session already exists, you'll be prompted to whether or not you'd like to load it.
 
-You can use the following setting if you wish change the default session name:
+The following default can be configured if you wish to change the session name:
 ```
 let g:workspace_session_name = 'Session.vim'
 ```
@@ -26,23 +26,25 @@ let g:workspace_session_name = 'Session.vim'
 
 When in a workspace, file undo history is persisted between sessions, without needing to keep Vim on.
 
-The following settings can be used if you wish to configure the feature:
+The following defaults can be configured if you wish to change feature behaviour:
 ```
 let g:workspace_persist_undo_history = 1
 let g:workspace_undodir='.undodir'
 ```
-### Persistent Cursor positions
+### Persistent Cursor Positions
 Any files in a workspace session will persist their cursor positions across reloads.
 ### File Autosave
 Being in a workspace enables the file autosave feature, which will autosave when leaving insert mode, when idle (as per updatetime), or when switching buffers/tabs.
 
-The following configurations are defaults that you can customize if you wish to change plugin behaviour:
+The following defaults can be configured if you wish to change feature behaviour:
 ```
 let g:workspace_autosave = 1
 set updatetime=1000
 ```
 ### Untrailing Spaces
-By default, all trailing spaces are trimmed before a buffer is autosaved. This behaviour can be configured on/off with the following setting:
+By default, all trailing spaces are trimmed before a buffer is autosaved.
+
+The following default can be configured if you wish to enable (1) or disable (0) the feature.
 ```
 let g:workspace_autosave_untrailspaces = 1
 ```
