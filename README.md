@@ -2,10 +2,10 @@
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/logo.jpg" height="220">
 </p>
 =========
-This workspace manager persistently tracks files in your session, their undo history, autosaves, and keeps your code clean of trailing spaces.
 <p align="center">
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif" >
 </p>
+This workspace manager persistently tracks files in your session, their undo history, autosaves, and keeps your code clean of trailing spaces.
 # Features
 ### Persistent Workspace
 Toggling the `ToggleWorkspace` command on will track your workspace session in a terminal's current working directory, i.e. a repo's root folder.
