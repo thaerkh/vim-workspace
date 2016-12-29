@@ -58,9 +58,10 @@ function! s:LoadWorkspace()
     if @% == ''
       execute 'source ' . g:workspace_session_name
     else
-      if input('A workspace exists! Would you like to load it? (y/n) ') != 'n'
-        bufdo bd
+      if input('A workspace exists! Would you like to load your selected files into it? (y/n) ') != 'n'
         execute 'source ' . g:workspace_session_name
+        tabnew
+        bfirst
       else
         let s:workspace_save_session = 0
       endif
