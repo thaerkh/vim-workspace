@@ -5,7 +5,7 @@ This workspace manager persistently tracks files in your session, their undo his
 ![img](https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif)
 # Features
 ### Persistent Workspace
-Toggling the `ToggleWorkspace` command on will track your workspace session in your terminal's current working directory, i.e a repo's root folder.
+Toggling the `ToggleWorkspace` command on will track your workspace session in a terminal's current working directory, i.e. a repo's root folder.
 
 You can bind this command to a convenient shortcut, such as the following mapleader example:
 ```
@@ -77,5 +77,5 @@ cd ~/.vim/bundle
 git clone https://github.com/thaerkh/vim-workspace
 ```
 
-## License
+# License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
