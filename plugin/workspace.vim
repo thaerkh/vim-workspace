@@ -46,7 +46,7 @@ function! s:WorkspaceExists()
 endfunction
 
 function! s:MakeWorkspace(workspace_save_session)
-  if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 1) == 1
+  if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
     execute 'mksession! ' . g:workspace_session_name
   endif
@@ -57,11 +57,13 @@ function! s:LoadWorkspace()
     call s:ConfigureWorkspace()
     if @% == ''
       execute 'source ' . g:workspace_session_name
+      let s:workspace_save_session = 1
     else
       if input('A workspace exists! Load your file arguments into it? (y/n) ') != 'n'
         execute 'source ' . g:workspace_session_name
         tabnew
         bfirst
+        let s:workspace_save_session = 1
       else
         let s:workspace_save_session = 0
       endif
