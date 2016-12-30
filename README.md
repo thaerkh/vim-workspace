@@ -36,7 +36,7 @@ let g:workspace_undodir='.undodir'
 ### Persistent Cursor Positions
 Any files in a workspace session will persist their cursor positions across reloads.
 ### File Autosave
-Being in a workspace enables the file autosave feature, which will autosave when leaving insert mode, when idle (as per updatetime), or when switching buffers/tabs.
+Files edited in a workspace session will autosave when leaving insert mode, idle in normal mode (defined by updatetime), or switching buffer/tab/window views.
 
 The following defaults can be configured if you wish to change feature behaviour:
 ```
