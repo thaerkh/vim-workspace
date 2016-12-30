@@ -5,7 +5,7 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif" >
 </p>
-Automatically persist files in your workspace session, their undo history, autosave, untrail spaces, and more!
+Automatically persist files in your workspace session, persist their undo history, autosave, untrail spaces, and more!
 # Features
 ### Persistent Workspace
 Toggling the `ToggleWorkspace` command on will track your workspace session in a terminal's current working directory, i.e. a repo's root folder.
