@@ -144,7 +144,7 @@ endfunction
 
 augroup Workspace
   au! VimEnter * call s:LoadWorkspace()
-  au! VimLeave * call s:MakeWorkspace(0)
+  au! VimLeave,BufEnter * call s:MakeWorkspace(0)
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
 
