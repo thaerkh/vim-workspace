@@ -52,22 +52,28 @@ function! s:MakeWorkspace(workspace_save_session)
   endif
 endfunction
 
+function! s:FindOrNew(filename)
+  let a:bufnr = bufnr(a:filename)
+  for tabnr in range(1, tabpagenr("$"))
+    for bufnr in tabpagebuflist(tabnr)
+      if (bufnr == a:bufnr)
+        execute 'tabn ' . tabnr
+        call win_gotoid(win_findbuf(a:bufnr)[0])
+        return
+      endif
+    endfor
+  endfor
+  tabnew
+  execute 'buffer ' . a:bufnr
+endfunction
+
 function! s:LoadWorkspace()
   if s:WorkspaceExists()
+    let s:workspace_save_session = 1
     call s:ConfigureWorkspace()
-    if @% == ''
-      execute 'source ' . g:workspace_session_name
-      let s:workspace_save_session = 1
-    else
-      if input('A workspace exists! Load your file arguments into it? (y/n) ') != 'n'
-        execute 'source ' . g:workspace_session_name
-        tabnew
-        bfirst
-        let s:workspace_save_session = 1
-      else
-        let s:workspace_save_session = 0
-      endif
-    endif
+    let a:filename = expand(@%)
+    execute 'source ' . g:workspace_session_name
+    call s:FindOrNew(a:filename)
   else
     let s:workspace_save_session = 0
   endif
