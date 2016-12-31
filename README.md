@@ -8,15 +8,14 @@
 Automatically persist files in your workspace session, persist their undo history, autosave, untrail spaces, and more!
 # Features
 ### Persistent Workspace
-Toggling the `ToggleWorkspace` command on will track your workspace session in a terminal's current working directory, i.e. a repo's root folder.
+Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
 
-You can bind this command to a convenient shortcut, such as the following mapleader example:
-```
-nnoremap <leader>m :ToggleWorkspace<CR>
-```
-When enabled, a session will persist every time you open Vim, with all workspace features enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
-If Vim is run with a file argument and it's already in the directory workspace, you'll be redirected to the tab window that contains it. Otherwise, it will be loaded in a new tab.
+If Vim is run with a file argument and it's already in the session's workspace, Vim will load the session and go to the tab window that contains it. Otherwise, it will be loaded as a new tab in the session.
 
+It is recommended you bind this command to a convenient shortcut, such as the following:
+```
+nnoremap <leader>w :ToggleWorkspace<CR>
+```
 The following default can be configured if you wish to change the session name:
 ```
 let g:workspace_session_name = 'Session.vim'
