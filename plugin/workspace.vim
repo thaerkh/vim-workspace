@@ -38,6 +38,8 @@ function! s:SetSensibleSettings()
     set autoindent
     set backspace=indent,eol,start
     set smarttab
+    
+    nnoremap Q <Nop>
   endif
 endfunction
 
