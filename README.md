@@ -64,9 +64,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
-call plug# begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged')
 Plug 'thaerkh/vim-workspace'
-call plug# end()
+call plug#end()
 ```
 If you don't already have Plug, this will auto-download Plug for you and install the vim-workspace plugin.
 
