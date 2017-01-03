@@ -19,7 +19,6 @@ function! s:SetSensibleSettings()
     set nocompatible
     set clipboard=unnamedplus
     set encoding=utf-8
-    set hidden
     set path+=**
     set wildmenu
     set wildmode=list:longest,full
