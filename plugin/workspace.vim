@@ -38,7 +38,7 @@ function! s:SetSensibleSettings()
     set autoindent
     set backspace=indent,eol,start
     set smarttab
-    
+
     nnoremap Q <Nop>
   endif
 endfunction
@@ -127,7 +127,7 @@ function! s:SetAutosave()
   if g:workspace_autosave
     set updatetime=1000
     augroup WorkspaceToggle
-      au! BufLeave,FocusLost,InsertLeave,TabLeave,WinLeave * call s:Autosave(0)
+      au! BufLeave,FocusLost,InsertLeave * call s:Autosave(0)
       au! CursorHold * call s:Autosave(1)
     augroup END
   endif
