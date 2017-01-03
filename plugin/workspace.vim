@@ -145,9 +145,6 @@ endfunction
 
 function! s:PostLoadCleanup()
   if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  if exists(':AirlineRefresh')
-    AirlineRefresh
-  endif
 endfunction
 
 augroup Workspace

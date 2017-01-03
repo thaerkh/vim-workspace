@@ -84,6 +84,11 @@ cd into your bundle path and clone the repo:
 cd ~/.vim/bundle
 git clone https://github.com/thaerkh/vim-workspace
 ```
-
+# Miscellaneous
+### Known Issues
+The Airline plugin doesn't redraw correctly when a Vim session is loaded. This autocommand in your vimrc will fix it:
+```
+au! SessionLoadPost * AirlineRefresh
+```
 # License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
