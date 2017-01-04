@@ -68,7 +68,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'thaerkh/vim-workspace'
 call plug#end()
 ```
-If you don't already have Plug, this will auto-download Plug for you and install the vim-workspace plugin.
+If you don't already have Plug, this will auto-download Plug for you and install the workspace plugin.
 
 If you already have Plug, simply paste `Plug 'thaerkh/vim-workspace'` and call `:PlugInstall` to install the plugin.
 
@@ -85,8 +85,17 @@ cd ~/.vim/bundle
 git clone https://github.com/thaerkh/vim-workspace
 ```
 # Miscellaneous
-### Known Issues
-The Airline plugin doesn't redraw correctly when a Vim session is loaded. This autocommand in your vimrc will fix it:
+### Recommended Plugins
+Influenced by the Unix philosophy, the workspace plugin aims to satisfy the workspace component of an IDE through a simple modular design. It was inspired by features in IntelliJ, and Vim plugins such as CtrlSpace.
+
+Here are a few personal recommendations that I believe are complementary to this plugin for programming in Vim.
+* [fzf.vim](https://github.com/junegunn/fzf.vim): General purpose command-line fuzzy file finder that integrates with Vim.
+* [VimCompletesMe](https://github.com/ajh17/VimCompletesMe): Simple tab autocompletion plugin (using tags).
+* [Gutentags](https://github.com/ludovicchabant/vim-gutentags): Tags file manager for your code references.
+* [UltiSnips](https://github.com/SirVer/ultisnips): Code snippets for boilerplate code.
+
+### Plugin Compatibility
+The Airline plugin doesn't redraw correctly when a session is loaded. This autocommand in your vimrc will fix it:
 ```
 au! SessionLoadPost * AirlineRefresh
 ```
