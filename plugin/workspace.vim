@@ -18,6 +18,7 @@ function! s:SetSensibleSettings()
     syntax on
     set nocompatible
     set clipboard=unnamedplus
+    set complete-=i
     set encoding=utf-8
     set path+=**
     set wildmenu
