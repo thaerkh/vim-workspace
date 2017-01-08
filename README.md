@@ -5,7 +5,7 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif" >
 </p>
-Automatically persist files in your Vim 8.0 workspace session, persist their undo history, autosave, untrail spaces, and more!
+Automatically take care the little things, so that you don't have to: persist files in your workspace session, persist their undo history, autosave, untrail spaces, and more!
 # Features
 ### Persistent Workspace
 Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
