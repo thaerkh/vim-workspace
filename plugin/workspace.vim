@@ -25,7 +25,6 @@ function! s:SetSensibleSettings()
     set wildmode=list:longest,full
 
     " Editor view
-    set cursorline
     set foldmethod=indent
     set nofoldenable
     set incsearch
