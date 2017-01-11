@@ -21,6 +21,8 @@ function! s:SetSensibleSettings()
     set complete-=i
     set encoding=utf-8
     set path+=**
+    set swapsync=""
+    set updatetime=1000
     set wildmenu
     set wildmode=list:longest,full
 
@@ -124,7 +126,6 @@ endfunction
 
 function! s:SetAutosave()
   if g:workspace_autosave
-    set updatetime=1000
     augroup WorkspaceToggle
       au! BufLeave,FocusLost,InsertLeave * call s:Autosave(0)
       au! CursorHold * call s:Autosave(1)
