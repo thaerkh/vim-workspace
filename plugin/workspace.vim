@@ -87,7 +87,7 @@ endfunction
 
 function! s:RemoveWorkspace()
   let s:workspace_save_session  = 0
-  execute "call delete(expand(\x27" . g:workspace_session_name . "\x27))"
+  execute printf('call delete("%s")', g:workspace_session_name)
   au! WorkspaceToggle * *
 endfunction
 
