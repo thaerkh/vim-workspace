@@ -94,10 +94,5 @@ Here are a few personal recommendations that I believe are complementary to this
 * [Gutentags](https://github.com/ludovicchabant/vim-gutentags): Tags file manager for your code references.
 * [UltiSnips](https://github.com/SirVer/ultisnips): Code snippets for boilerplate code.
 
-### Plugin Compatibility
-The Airline plugin doesn't redraw correctly when a session is loaded. This autocommand in your vimrc will fix it:
-```
-au! SessionLoadPost * AirlineRefresh
-```
 # License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
