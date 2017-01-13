@@ -12,6 +12,7 @@ let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  "
 
 
 function! s:SetSensibleSettings()
+  set sessionoptions-=options
   if g:workspace_sensible_settings
     " Environment behaviour
     filetype plugin indent on
@@ -51,7 +52,7 @@ endfunction
 function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
-    execute 'mksession! ' . g:workspace_session_name
+    execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
   endif
 endfunction
 
@@ -73,9 +74,9 @@ endfunction
 function! s:LoadWorkspace()
   if s:WorkspaceExists()
     let s:workspace_save_session = 1
-    call s:ConfigureWorkspace()
     let a:filename = expand(@%)
     execute 'source ' . g:workspace_session_name
+    call s:ConfigureWorkspace()
     call s:FindOrNew(a:filename)
   else
     let s:workspace_save_session = 0
@@ -129,6 +130,7 @@ function! s:SetAutosave()
     augroup WorkspaceToggle
       au! BufLeave,FocusLost,InsertLeave * call s:Autosave(0)
       au! CursorHold * call s:Autosave(1)
+      au! BufEnter * call s:MakeWorkspace(0)
     augroup END
   endif
 endfunction
@@ -148,8 +150,8 @@ function! s:PostLoadCleanup()
 endfunction
 
 augroup Workspace
-  au! VimEnter * call s:LoadWorkspace()
-  au! VimLeave,BufEnter * call s:MakeWorkspace(0)
+  au! VimEnter * nested call s:LoadWorkspace()
+  au! VimLeave * call s:MakeWorkspace(0)
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
 
