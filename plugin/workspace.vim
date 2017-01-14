@@ -12,7 +12,8 @@ let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  "
 
 
 function! s:SetSensibleSettings()
-  " Needed for plugin behaviour
+  " Needed for plugin features
+  set omnifunc=syntaxcomplete#Complete
   set sessionoptions-=options
   set updatetime=1000
 
@@ -24,7 +25,6 @@ function! s:SetSensibleSettings()
     set clipboard=unnamedplus
     set complete-=i
     set encoding=utf-8
-    set omnifunc=syntaxcomplete#Complete
     set path+=**
     set swapsync=""
     set wildmenu
