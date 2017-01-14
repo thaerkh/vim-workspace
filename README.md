@@ -14,6 +14,11 @@ If you would like to enable these settings (viewable in `plugin/workspace.vim`),
 ```
 let g:workspace_sensible_settings = 1
 ```
+## Omni Completion
+Intelligent code autocompletion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its features are not enabled by default. This workspace plugin simply surfaces this functionality, with extra features.
+
+Vim's default omni completion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
+
 ## Persistent Workspace
 #### Vim Session
 Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
@@ -54,10 +59,6 @@ The following default can be configured if you wish to enable (1) or disable (0)
 ```
 let g:workspace_autosave_untrailspaces = 1
 ```
-## Omni Completion
-Intelligent code autocompletion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its features are not enabled by default. This workspace plugin simply surfaces this functionality, with extra features.
-
-Vim's default omni completion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
 
 # Installation
 This plugin requires Vim 8.0, follows the standard runtime path structure, and can be installed with a variety of plugin managers.
