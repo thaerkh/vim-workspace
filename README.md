@@ -7,6 +7,13 @@
 </p>
 Automatically take care the little things, so that you don't have to: persist files in your workspace session, persist their undo history, autosave, untrail spaces, and more!
 # Features
+## Sensible Settings
+While `not enabled by default`, this plugin comes available with common unobtrusive vim settings that everybody can agree on.
+
+If you would like to enable these settings (viewable in `plugin/workspace.vim`), add the following to your vimrc:
+```
+let g:workspace_sensible_settings = 1
+```
 ## Persistent Workspace
 #### Vim Session
 Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
@@ -32,11 +39,7 @@ let g:workspace_undodir='.undodir'
 ```
 #### Cursor Positions
 Any files in a workspace session will persist their cursor positions across reloads.
-## Omni Completion
-Intelligent code autocompletion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its features are not enabled by default. This workspace plugin simply surfaces this functionality, with extra features.
-
-Vim's default omni completion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
-## File Autosave
+#### File Autosave
 Files edited in a workspace session will autosave when leaving insert mode, idle in normal mode (defined by updatetime), or leaving a buffer view.
 
 The following defaults can be configured if you wish to change feature behaviour:
@@ -51,13 +54,10 @@ The following default can be configured if you wish to enable (1) or disable (0)
 ```
 let g:workspace_autosave_untrailspaces = 1
 ```
-## Sensible Settings
-While `not enabled by default`, this plugin comes available with common vim settings that most/all people can agree on.
+## Omni Completion
+Intelligent code autocompletion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its features are not enabled by default. This workspace plugin simply surfaces this functionality, with extra features.
 
-If you would like to enable these settings (viewable in `plugin/workspace.vim`), add the following to your vimrc:
-```
-let g:workspace_sensible_settings = 1
-```
+Vim's default omni completion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
 
 # Installation
 This plugin requires Vim 8.0, follows the standard runtime path structure, and can be installed with a variety of plugin managers.
