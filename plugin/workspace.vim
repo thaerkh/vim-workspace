@@ -13,6 +13,7 @@ let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  "
 
 function! s:SetSensibleSettings()
   " Needed for plugin features
+  set completeopt=menuone,longest,preview
   set omnifunc=syntaxcomplete#Complete
   set sessionoptions-=options
 
