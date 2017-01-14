@@ -12,7 +12,10 @@ let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  "
 
 
 function! s:SetSensibleSettings()
+  " Needed for plugin behaviour
   set sessionoptions-=options
+  set updatetime=1000
+
   if g:workspace_sensible_settings
     " Environment behaviour
     filetype plugin indent on
@@ -24,7 +27,6 @@ function! s:SetSensibleSettings()
     set omnifunc=syntaxcomplete#Complete
     set path+=**
     set swapsync=""
-    set updatetime=1000
     set wildmenu
     set wildmode=list:longest,full
 
