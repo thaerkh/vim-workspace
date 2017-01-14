@@ -15,7 +15,6 @@ function! s:SetSensibleSettings()
   " Needed for plugin features
   set omnifunc=syntaxcomplete#Complete
   set sessionoptions-=options
-  set updatetime=1000
 
   if g:workspace_sensible_settings
     " Environment behaviour
@@ -27,6 +26,7 @@ function! s:SetSensibleSettings()
     set encoding=utf-8
     set path+=**
     set swapsync=""
+    set updatetime=1000
     set wildmenu
     set wildmode=list:longest,full
 
