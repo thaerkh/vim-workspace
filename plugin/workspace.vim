@@ -21,6 +21,7 @@ function! s:SetSensibleSettings()
     set clipboard=unnamedplus
     set complete-=i
     set encoding=utf-8
+    set omnifunc=syntaxcomplete#Complete
     set path+=**
     set swapsync=""
     set updatetime=1000
