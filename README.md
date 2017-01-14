@@ -20,8 +20,8 @@ The following default can be configured if you wish to change the session name:
 ```
 let g:workspace_session_name = 'Session.vim'
 ```
-### Omnicompletion
-Intelligent code autocompletion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its usage is hidden away in the bowels of documentation. This workspace plugin simply surfaces this functionality, with extra features. Vim's default omnicompletion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
+### Omni Completion
+Intelligent code autocompletion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its features are not enabled by default. This workspace plugin simply surfaces this functionality, with extra features. Vim's default omni completion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
 ### Persistent Undo History
 
 When in a workspace, file undo history is persisted between sessions, without needing to keep Vim on.
