@@ -7,7 +7,7 @@
 </p>
 Automatically take care the little things, so that you don't have to: persist files in your workspace session, persist their undo history, autosave, untrail spaces, and more!
 # Features
-### Persistent Workspace
+## Persistent Workspace
 Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
 
 If Vim is run with a file argument and it's already in the session's workspace, Vim will load the session and go to the tab window that contains it. Otherwise, it will be loaded as a new tab in the session.
@@ -20,9 +20,7 @@ The following default can be configured if you wish to change the session name:
 ```
 let g:workspace_session_name = 'Session.vim'
 ```
-### Omni Completion
-Intelligent code autocompletion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its features are not enabled by default. This workspace plugin simply surfaces this functionality, with extra features. Vim's default omni completion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
-### Persistent Undo History
+#### Undo History
 
 When in a workspace, file undo history is persisted between sessions, without needing to keep Vim on.
 
@@ -31,9 +29,13 @@ The following defaults can be configured if you wish to change feature behaviour
 let g:workspace_persist_undo_history = 1
 let g:workspace_undodir='.undodir'
 ```
-### Persistent Cursor Positions
+#### Cursor Positions
 Any files in a workspace session will persist their cursor positions across reloads.
-### File Autosave
+## Omni Completion
+Intelligent code autocompletion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its features are not enabled by default. This workspace plugin simply surfaces this functionality, with extra features.
+
+Vim's default omni completion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
+## File Autosave
 Files edited in a workspace session will autosave when leaving insert mode, idle in normal mode (defined by updatetime), or leaving a buffer view.
 
 The following defaults can be configured if you wish to change feature behaviour:
@@ -41,14 +43,14 @@ The following defaults can be configured if you wish to change feature behaviour
 let g:workspace_autosave = 1
 set updatetime=1000
 ```
-### Untrailing Spaces
+#### Untrailing Spaces
 By default, all trailing spaces are trimmed before a buffer is autosaved.
 
 The following default can be configured if you wish to enable (1) or disable (0) the feature.
 ```
 let g:workspace_autosave_untrailspaces = 1
 ```
-### Sensible Settings
+## Sensible Settings
 While `not enabled by default`, this plugin comes available with common vim settings that most/all people can agree on.
 
 If you would like to enable these settings (viewable in `plugin/workspace.vim`), add the following to your vimrc:
