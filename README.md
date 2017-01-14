@@ -84,15 +84,6 @@ cd into your bundle path and clone the repo:
 cd ~/.vim/bundle
 git clone https://github.com/thaerkh/vim-workspace
 ```
-# Miscellaneous
-### Recommended Plugins
-Influenced by the Unix philosophy, the workspace plugin aims to satisfy the workspace component of an IDE through a simple modular design. It was inspired by features in IntelliJ, and Vim plugins such as CtrlSpace.
-
-Here are a few personal recommendations that I believe are complementary to this plugin for programming in Vim.
-* [fzf.vim](https://github.com/junegunn/fzf.vim): General purpose command-line fuzzy file finder that integrates with Vim.
-* [VimCompletesMe](https://github.com/ajh17/VimCompletesMe): Simple tab autocompletion plugin (using tags).
-* [Gutentags](https://github.com/ludovicchabant/vim-gutentags): Tags file manager for your code references.
-* [UltiSnips](https://github.com/SirVer/ultisnips): Code snippets for boilerplate code.
 
 # License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
