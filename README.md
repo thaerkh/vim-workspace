@@ -14,9 +14,6 @@ If you would like to enable these settings (viewable in `plugin/workspace.vim`),
 ```
 let g:workspace_sensible_settings = 1
 ```
-## Omni Completion
-Vim's omni completion is enabled by default, and any orphaned preview windows will automatically close after a selection has been made.
-
 ## Persistent Workspace
 #### Vim Session
 Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
@@ -57,6 +54,8 @@ The following default can be configured if you wish to enable (1) or disable (0)
 ```
 let g:workspace_autosave_untrailspaces = 1
 ```
+#### Omni Completion
+Vim's omni completion is enabled by default, and any orphaned preview windows will automatically close when resuming typing or leaving insert mode.
 
 # Installation
 This plugin requires Vim 8.0, follows the standard runtime path structure, and can be installed with a variety of plugin managers.
@@ -66,7 +65,9 @@ Paste the following in your `~/.vimrc` file:
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
+endif## Omni Completion
+Vim's omni completion is enabled by default, and any orphaned preview windows will automatically close after a selection has been made.
+
 
 call plug#begin('~/.vim/plugged')
 Plug 'thaerkh/vim-workspace'
