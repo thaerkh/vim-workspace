@@ -15,9 +15,7 @@ If you would like to enable these settings (viewable in `plugin/workspace.vim`),
 let g:workspace_sensible_settings = 1
 ```
 ## Omni Completion
-Context-aware omni completion has been bundled with Vim since version 7.2 (SyntaxComplete plugin), but its features are not enabled by default. This workspace plugin simply surfaces this functionality, with extra features.
-
-Vim's default omni completion shortcut `<C-x><C-o>` will work as expected, and this plugin will automatically remove that pesky function preview window after a selection has been made.
+Vim's omni completion is enabled by default, and any orphaned preview windows will automatically close after a selection has been made.
 
 ## Persistent Workspace
 #### Vim Session
