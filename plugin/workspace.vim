@@ -156,7 +156,7 @@ endfunction
 augroup Workspace
   au! VimEnter * nested call s:LoadWorkspace()
   au! VimLeave * call s:MakeWorkspace(0)
-  au! InsertLeave,CursorMovedI * if pumvisible() == 0|pclose|endif
+  au! InsertLeave * if pumvisible() == 0|pclose|endif
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
 

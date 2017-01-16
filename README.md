@@ -55,7 +55,7 @@ The following default can be configured if you wish to enable (1) or disable (0)
 let g:workspace_autosave_untrailspaces = 1
 ```
 #### Omni Completion
-Vim's omni completion is enabled by default, and any orphaned preview windows will automatically close when resuming typing or leaving insert mode.
+Vim's omni completion is enabled by default, and any orphaned preview windows will automatically close when leaving insert mode.
 
 # Installation
 This plugin requires Vim 8.0, follows the standard runtime path structure, and can be installed with a variety of plugin managers.
