@@ -123,7 +123,7 @@ endfunction
 function! s:Autosave(timed)
   let current_time = localtime()
   let s:last_update = get(s:, 'last_update', 0)
-  if a:timed == 0 || (current_time - s:last_update) > 1
+  if a:timed == 0 || (current_time - s:last_update) >= 1
     let s:last_update = current_time
     call s:UntrailSpaces() | silent! write
   endif
