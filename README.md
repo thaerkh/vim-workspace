@@ -40,7 +40,11 @@ let g:workspace_undodir='.undodir'
 #### Cursor Positions
 Any files in a workspace session will persist their cursor positions across reloads.
 #### File Autosave
-Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), FocusLost, or BufLeave. Vim's default updatetime of 4000 (4 seconds) dictates autosave on CursorHold, and this trigger can be configured to autosave down to 1000 (a default configuration in sensible settings).
+Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).
+
+Vim's default updatetime of 4000 (4 seconds) specifies time for autosave on CursorHold, and can be dropped to 1000 (default in sensible settings).
+
+FocusLost and FocusGained triggers will typically trigger only with GUI versions of Vim. However, there are plugins that enables these for the console version within Tmux (i.e. sjl/vitality.vim).
 
 The following defaults can be configured if you wish to change feature behaviour:
 ```

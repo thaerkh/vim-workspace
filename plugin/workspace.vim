@@ -140,7 +140,7 @@ function! s:SetAutosave()
     set autoread
     set autowrite
     augroup WorkspaceToggle
-      au! BufLeave,FocusLost,InsertLeave * call s:Autosave(0)
+      au! BufLeave,FocusLost,FocusGained,InsertLeave * call s:Autosave(0)
       au! CursorHold * call s:Autosave(1)
       au! BufEnter * call s:MakeWorkspace(0)
     augroup END
