@@ -95,7 +95,11 @@ endfunction
 function! s:RemoveWorkspace()
   let s:workspace_save_session  = 0
   execute printf('call delete("%s")', g:workspace_session_name)
-  au! WorkspaceToggle * *
+  if g:workspace_autosave:
+    set noautoread
+    set noautowrite
+    au! WorkspaceToggle * *
+  endif
 endfunction
 
 function! s:ToggleWorkspace()
@@ -125,12 +129,16 @@ function! s:Autosave(timed)
   let s:last_update = get(s:, 'last_update', 0)
   if a:timed == 0 || (current_time - s:last_update) >= 1
     let s:last_update = current_time
-    call s:UntrailSpaces() | silent! write
+    checktime
+    call s:UntrailSpaces()
+    silent! update
   endif
 endfunction
 
 function! s:SetAutosave()
   if g:workspace_autosave
+    set autoread
+    set autowrite
     augroup WorkspaceToggle
       au! BufLeave,FocusLost,InsertLeave * call s:Autosave(0)
       au! CursorHold * call s:Autosave(1)
