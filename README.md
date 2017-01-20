@@ -40,12 +40,12 @@ let g:workspace_undodir='.undodir'
 #### Cursor Positions
 Any files in a workspace session will persist their cursor positions across reloads.
 #### File Autosave
-Files edited in a workspace session will autosave when leaving insert mode, idle in normal mode (defined by updatetime), or leaving a buffer view.
+Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), FocusLost, or BufLeave. Vim's default updatetime of 4000 (4 seconds) dictates autosave on CursorHold, and this trigger can be configured to autosave down to 1000 (a default configuration in sensible settings).
 
 The following defaults can be configured if you wish to change feature behaviour:
 ```
 let g:workspace_autosave = 1
-set updatetime=1000
+set updatetime=4000
 ```
 #### Untrailing Spaces
 By default, all trailing spaces are trimmed before a buffer is autosaved.
