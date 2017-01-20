@@ -101,8 +101,8 @@ endfunction
 function! s:ToggleWorkspace()
   if s:WorkspaceExists()
     call s:RemoveWorkspace()
-    execute 'silent !rm -rf ' . g:workspace_undodir
-    redraw!
+    execute printf('silent !rm -rf %s', g:workspace_undodir)
+    call feedkeys("") | silent! redraw!
     echo 'Workspace removed!'
   else
     call s:MakeWorkspace(1)
