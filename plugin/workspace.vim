@@ -95,7 +95,7 @@ endfunction
 function! s:RemoveWorkspace()
   let s:workspace_save_session  = 0
   execute printf('call delete("%s")', g:workspace_session_name)
-  if g:workspace_autosave:
+  if g:workspace_autosave
     set noautoread
     set noautowrite
     au! WorkspaceToggle * *
