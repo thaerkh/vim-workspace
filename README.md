@@ -30,15 +30,13 @@ let g:workspace_session_name = 'Session.vim'
 ```
 #### Undo History
 
-When in a workspace, file undo history is persisted between sessions, without needing to keep Vim on.
+When in a workspace, file undo history is persisted between sessions, without needing to keep Vim on. Cursor positions will also persist across session reloads.
 
 The following defaults can be configured if you wish to change feature behaviour:
 ```
 let g:workspace_persist_undo_history = 1  " enabled = 1 (default), disabled = 0
 let g:workspace_undodir='.undodir'
 ```
-##### Cursor Positions
-Any files in a workspace session will persist their cursor positions across reloads.
 #### File Autosave
 Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).
 
