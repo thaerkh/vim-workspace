@@ -119,7 +119,7 @@ function! s:UntrailSpaces()
   if g:workspace_autosave_untrailspaces && &modifiable
     let curr_row = line('.')
     let curr_col = virtcol('.')
-    :%s/\s\+$//e
+    :%s/\ \+$//e
     cal cursor(curr_row, curr_col)
   endif
 endfunction
