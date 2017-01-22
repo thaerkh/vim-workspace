@@ -22,7 +22,7 @@ If Vim is run with a file argument and it's already in the session's workspace, 
 
 It is recommended you bind this command to a convenient shortcut, such as the following:
 ```
-nnoremap <leader>w :ToggleWorkspace<CR>
+nnoremap <leader>s :ToggleWorkspace<CR>
 ```
 The following default can be configured if you wish to change the session name:
 ```
@@ -34,7 +34,7 @@ When in a workspace, file undo history is persisted between sessions, without ne
 
 The following defaults can be configured if you wish to change feature behaviour:
 ```
-let g:workspace_persist_undo_history = 1
+let g:workspace_persist_undo_history = 1  " enabled = 1 (default), disabled = 0
 let g:workspace_undodir='.undodir'
 ```
 #### Cursor Positions
@@ -42,24 +42,28 @@ Any files in a workspace session will persist their cursor positions across relo
 #### File Autosave
 Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).
 
-Vim's default updatetime of 4000 (4 seconds) specifies time for autosave on CursorHold, and can be dropped to 1000 (default in sensible settings).
-
 FocusLost and FocusGained triggers will typically trigger only with GUI versions of Vim. However, there are plugins that enables these for the console version within Tmux (i.e. sjl/vitality.vim).
 
-The following defaults can be configured if you wish to change feature behaviour:
+The following defaults are shown as configuration examples, if you wish to change feature behaviour:
 ```
 let g:workspace_autosave = 1
-set updatetime=4000
+set updatetime=4000  " Default Vim setting (specifies CursorHold wait time).
 ```
-#### Untrailing Spaces
-By default, all trailing spaces are trimmed before a buffer is autosaved.
 
-The following default can be configured if you wish to enable (1) or disable (0) the feature.
+##### Untrailing Spaces
+By default, all trailing spaces are trimmed before a buffer is autosaved. If you don't prefer this behaviour, add this line:
 ```
-let g:workspace_autosave_untrailspaces = 1
+let g:workspace_autosave_untrailspaces = 0
 ```
+
+##### Autosave Ignore List
+Git commit filetypes won't autosave (or trim trailing spaces) by default. You can customize the ignore list with this line:
+```
+let g:workspace_autosave_ignore = ['gitcommit']
+```
+
 #### Omni Completion
-Vim's omni completion is enabled by default, and any orphaned preview windows will automatically close when leaving insert mode.
+Vim's omni completion is enabled by default. Any preview windows will automatically close on InsertLeave.
 
 # Installation
 This plugin requires Vim 8.0, follows the standard runtime path structure, and can be installed with a variety of plugin managers.

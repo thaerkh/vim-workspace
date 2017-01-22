@@ -7,6 +7,7 @@ let g:workspace_session_name = get(g:, 'workspace_session_name', 'Session.vim')
 let g:workspace_undodir = get(g:, 'workspace_undodir', '.undodir')
 let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history', 1)
 let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
+let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
 let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  " off by default
 
@@ -125,6 +126,10 @@ function! s:UntrailSpaces()
 endfunction
 
 function! s:Autosave(timed)
+  if index(g:workspace_autosave_ignore, &filetype) != -1
+    return
+  endif
+
   let current_time = localtime()
   let s:last_update = get(s:, 'last_update', 0)
   if a:timed == 0 || (current_time - s:last_update) >= 1
