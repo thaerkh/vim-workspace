@@ -8,7 +8,7 @@
 Automatically take care the little things, so that you don't have to: persist files in your workspace session, persist their undo history, autosave, untrail spaces, and more!
 # Features
 ## Sensible Settings
-While `not enabled by default`, this plugin comes available with common unobtrusive vim settings that everybody can agree on.
+While `not enabled by default`, this plugin comes available with useful vim settings that everybody can agree on.
 
 If you would like to enable these settings (viewable in `plugin/workspace.vim`), add the following to your vimrc:
 ```
@@ -37,7 +37,7 @@ The following defaults can be configured if you wish to change feature behaviour
 let g:workspace_persist_undo_history = 1  " enabled = 1 (default), disabled = 0
 let g:workspace_undodir='.undodir'
 ```
-#### Cursor Positions
+##### Cursor Positions
 Any files in a workspace session will persist their cursor positions across reloads.
 #### File Autosave
 Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).
