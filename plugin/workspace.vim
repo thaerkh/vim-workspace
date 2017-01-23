@@ -27,10 +27,13 @@ function! s:SetSensibleSettings()
     set complete-=i
     set encoding=utf-8
     set path+=**
-    set swapsync=""
     set updatetime=1000
     set wildmenu
     set wildmode=list:longest,full
+
+    if !has('nvim')
+      set swapsync=""
+    endif
 
     " Editor view
     set foldmethod=indent
