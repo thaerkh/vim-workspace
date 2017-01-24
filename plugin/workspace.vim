@@ -109,6 +109,10 @@ function! s:ToggleWorkspace()
 endfunction
 
 function! s:LoadWorkspace()
+  if index(g:workspace_autosave_ignore, &filetype) != -1
+    return
+  endif
+
   if s:WorkspaceExists()
     let s:workspace_save_session = 1
     let a:filename = expand(@%)
