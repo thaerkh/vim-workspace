@@ -10,6 +10,7 @@ let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
 let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  " off by default
+let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0) " off by default
 
 
 function! s:SetSensibleSettings()
@@ -79,18 +80,6 @@ function! s:FindOrNew(filename)
   execute 'buffer ' . a:bufnr
 endfunction
 
-function! s:LoadWorkspace()
-  if s:WorkspaceExists()
-    let s:workspace_save_session = 1
-    let a:filename = expand(@%)
-    execute 'source ' . g:workspace_session_name
-    call s:ConfigureWorkspace()
-    call s:FindOrNew(a:filename)
-  else
-    let s:workspace_save_session = 0
-  endif
-endfunction
-
 function! s:ConfigureWorkspace()
   call s:SetUndoDir()
   call s:SetAutosave()
@@ -116,6 +105,26 @@ function! s:ToggleWorkspace()
     call s:MakeWorkspace(1)
     call s:ConfigureWorkspace()
     echo 'Workspace created!'
+  endif
+endfunction
+
+function! s:LoadWorkspace()
+  if index(g:workspace_autosave_ignore, &filetype) != -1
+    return
+  endif
+
+  if s:WorkspaceExists()
+    let s:workspace_save_session = 1
+    let a:filename = expand(@%)
+    execute 'source ' . g:workspace_session_name
+    call s:ConfigureWorkspace()
+    call s:FindOrNew(a:filename)
+  else
+    if g:workspace_autocreate
+      call s:ToggleWorkspace()
+    else
+      let s:workspace_save_session = 0
+    endif
   endif
 endfunction
 
@@ -177,6 +186,7 @@ augroup Workspace
 augroup END
 
 command! ToggleWorkspace call s:ToggleWorkspace()
+command! WorkspaceExists call s:WorkspaceExists()
 
 call s:SetSensibleSettings()
 
