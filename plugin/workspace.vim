@@ -9,6 +9,7 @@ let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history',
 let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit', 'gitrebase'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
+let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 4)
 let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  " off by default
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0) " off by default
 
@@ -144,11 +145,15 @@ function! s:Autosave(timed)
 
   let current_time = localtime()
   let s:last_update = get(s:, 'last_update', 0)
-  if a:timed == 0 || (current_time - s:last_update) >= 1
+  let s:time_delta = current_time - s:last_update
+  if a:timed == 0 || s:time_delta >= 1
     let s:last_update = current_time
     checktime
     call s:UntrailSpaces()
     silent! update
+    if s:time_delta >= g:workspace_autosave_au_updatetime
+      doautocmd BufWritePost %
+    endif
   endif
 endfunction
 
