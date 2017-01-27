@@ -151,7 +151,7 @@ function! s:Autosave(timed)
     checktime
     call s:UntrailSpaces()
     silent! update
-    if s:time_delta >= g:workspace_autosave_au_updatetime
+    if a:timed == 0 || s:time_delta >= g:workspace_autosave_au_updatetime
       doautocmd BufWritePost %
     endif
   endif
