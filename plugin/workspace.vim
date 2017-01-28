@@ -81,6 +81,21 @@ function! s:FindOrNew(filename)
   execute 'buffer ' . a:bufnr
 endfunction
 
+function! s:CloseHiddenBuffers()
+  let a:visible_buffers = {}
+  for tabnr in range(1, tabpagenr('$'))
+    for bufnr in tabpagebuflist(tabnr)
+      let a:visible_buffers[bufnr] = 1
+    endfor
+  endfor
+
+  for bufnr in range(1, bufnr('$'))
+    if bufexists(bufnr) && !has_key(a:visible_buffers,bufnr)
+      execute printf('bdelete %d', bufnr)
+    endif
+  endfor
+endfunction
+
 function! s:ConfigureWorkspace()
   call s:SetUndoDir()
   call s:SetAutosave()
@@ -192,6 +207,7 @@ augroup END
 
 command! ToggleWorkspace call s:ToggleWorkspace()
 command! WorkspaceExists call s:WorkspaceExists()
+command! CloseHiddenBuffers call s:CloseHiddenBuffers()
 
 call s:SetSensibleSettings()
 

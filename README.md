@@ -28,6 +28,11 @@ The following default can be configured if you wish to change the session name:
 ```
 let g:workspace_session_name = 'Session.vim'
 ```
+
+##### Hidden Buffers
+Over time, hidden buffers can build up to a point where most are unnecessary, with only those currently tied to a tab window being important.
+When called, the command `CloseHiddenBuffers` will close any hidden buffers meeting this criteria.
+
 #### Undo History
 
 When in a workspace, file undo history is persisted between sessions, without needing to keep Vim on. Cursor positions will also persist across session reloads.
