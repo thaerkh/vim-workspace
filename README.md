@@ -46,7 +46,7 @@ let g:workspace_undodir='.undodir'
 #### Omni Completion
 Vim's omni completion is enabled by default. Any preview windows will automatically close on InsertLeave.
 
-### Autosave
+## Autosave
 Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).
 
 FocusLost and FocusGained triggers will typically trigger only with GUI versions of Vim. However, there are plugins that enables these for the console version within Tmux (i.e. sjl/vitality.vim).
