@@ -5,12 +5,14 @@ License: Apache 2.0
 ==============================================================================
 Table of Contents                                           *contents*
 
-1. Sensible Settings         |sensible-settings|
-2. Workspace Sessions        |workspace-sessions|
-3. Autosave                  |autosave|
-4. Undo History              |undo-history|
-5. Untrailing Spaces         |untrailing-spaces|
-6. Omni Completion           |omni-completion|
+1.   Sensible Settings        |sensible-settings|
+2.   Workspace Sessions       |workspace-sessions|
+2.1. Hidden Buffers           |hidden-buffers|
+2.2. Undo History             |undo-history|
+2.3. Omni Completion          |omni-completion|
+3.   Autosave                 |autosave|
+3.1. Untrailing Spaces        |untrailing-spaces|
+3.2. Autosave Ignore List     |autosave-ignore-list|
 
 ==============================================================================
 1. Sensible Settings                               *sensible-settings*
@@ -45,9 +47,34 @@ The Vim session will be stored in your directory. The filename is set to the
 default session name set by Vim, but can be changed with this configuration:
 `let g:workspace_session_name = 'Session.vim'`
 
+------------------------------------------------------------------------------
+2.1. Hidden Buffers                                   *hidden-buffers*
 Over time, hidden buffers can build up to a point where most are unnecessary,
 with only those currently tied to a tab window being important.
 When called, the command `CloseHiddenBuffers` closes these hidden buffers.
+
+------------------------------------------------------------------------------
+2.2. Undo History                                       *undo-history*
+
+When in a workspace, file undo history is persisted between sessions, without
+needing to keep Vim on.
+
+This feature can also be explicitly enabled or disabled, such as the following:
+`let g:workspace_persist_undo_history = 1`
+
+Undo history will be stored in the local directory as a hidden folder. The
+default can be explicitly configured, and is set to the following:
+`let g:workspace_undodir='.undodir'`
+
+------------------------------------------------------------------------------
+2.3. Omni Completion                                 *omni-completion*
+
+Vim comes with omni completion since 7.2 (packaged with SyntaxComplete plugin).
+Many filetypes also come with omni completion set (i.e. Python), but the default
+omnifunc behaviour is clunky and substandard. Preview windows are set to appear
+by default, and will close on InsertLeave (as opposed to sticking around).
+Completion menu settings have also been tweaked to give more predictive
+behaviour.
 
 ==============================================================================
 3. Autosave                                                 *autosave*
@@ -68,32 +95,17 @@ default. The sensible settings provided sets this to 1 second. However, if you
 wolud like your own time configuration, customize the following in your vimrc:
 `set updatetime=4000`
 
-==============================================================================
-4. Undo History                                         *undo-history*
-
-When in a workspace, file undo history is persisted between sessions, without
-needing to keep Vim on.
-
-This feature can also be explicitly enabled or disabled, such as the following:
-`let g:workspace_persist_undo_history = 1`
-
-Undo history will be stored in the local directory as a hidden folder. The
-default can be explicitly configured, and is set to the following:
-`let g:workspace_undodir='.undodir'`
-
-==============================================================================
-5. Untrailing Spaces                               *untrailing-spaces*
+------------------------------------------------------------------------------
+3.1. Untrailing Spaces                             *untrailing-spaces*
 
 By default, all trailing spaces will be removed upon autosave.
 If you don't prefer this behaviour, add this line:
 `let g:workspace_autosave_untrailspaces = 0`
 
-==============================================================================
-6. Omni Completion                                   *omni-completion*
+------------------------------------------------------------------------------
+3.2. Autosave Ignore List                       *autosave-ignore-list*
 
-Vim comes with omni completion since 7.2 (packaged with SyntaxComplete plugin).
-Many filetypes also come with omni completion set (i.e. Python), but the default
-omnifunc behaviour is clunky and substandard. Preview windows are set to appear
-by default, and will close on InsertLeave (as opposed to sticking around).
-Completion menu settings have also been tweaked to give more predictive
-behaviour.
+Git commit filetypes won't autosave (or trim trailing spaces) by default.
+
+You can customize the ignore list as follows:
+`let g:workspace_autosave_ignore = ['gitcommit']`

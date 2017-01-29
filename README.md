@@ -5,7 +5,7 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif" >
 </p>
-Automatically take care the little things, so that you don't have to: persist files in your workspace session, persist their undo history, autosave, untrail spaces, and more!
+Automatically manage your Vim session, coupled with tunable autosave features.
 # Features
 ## Sensible Settings
 While `not enabled by default`, this plugin comes available with useful vim settings that everybody can agree on.
@@ -14,7 +14,7 @@ If you would like to enable these settings (viewable in `plugin/workspace.vim`),
 ```
 let g:workspace_sensible_settings = 1
 ```
-## Workspace
+## Workspace Sessions
 #### Persistent Vim Session
 Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
 
@@ -29,7 +29,7 @@ The following default can be configured if you wish to change the session name:
 let g:workspace_session_name = 'Session.vim'
 ```
 
-##### Hidden Buffers
+#### Hidden Buffers
 Over time, hidden buffers can build up to a point where most are unnecessary, with only those currently tied to a tab window being important.
 When called, the command `CloseHiddenBuffers` will close any hidden buffers meeting this criteria.
 
@@ -42,7 +42,11 @@ The following defaults can be configured if you wish to change feature behaviour
 let g:workspace_persist_undo_history = 1  " enabled = 1 (default), disabled = 0
 let g:workspace_undodir='.undodir'
 ```
-#### File Autosave
+
+#### Omni Completion
+Vim's omni completion is enabled by default. Any preview windows will automatically close on InsertLeave.
+
+### Autosave
 Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).
 
 FocusLost and FocusGained triggers will typically trigger only with GUI versions of Vim. However, there are plugins that enables these for the console version within Tmux (i.e. sjl/vitality.vim).
@@ -53,20 +57,17 @@ let g:workspace_autosave = 1
 set updatetime=4000  " Default Vim setting (specifies CursorHold wait time).
 ```
 
-##### Untrailing Spaces
+#### Untrailing Spaces
 By default, all trailing spaces are trimmed before a buffer is autosaved. If you don't prefer this behaviour, add this line:
 ```
 let g:workspace_autosave_untrailspaces = 0
 ```
 
-##### Autosave Ignore List
+#### Autosave Ignore List
 Git commit filetypes won't autosave (or trim trailing spaces) by default. You can customize the ignore list with this line:
 ```
 let g:workspace_autosave_ignore = ['gitcommit']
 ```
-
-#### Omni Completion
-Vim's omni completion is enabled by default. Any preview windows will automatically close on InsertLeave.
 
 # Installation
 This plugin requires Vim 8.0, follows the standard runtime path structure, and can be installed with a variety of plugin managers.
