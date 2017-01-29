@@ -1,21 +1,21 @@
-*workspace.txt*          The Vim Workspace Manager
+*workspace.txt*          The Vim Workspace Manager     *vim-workspace*
 ==============================================================================
 Author: Thaer Khawaja <https://github.com/thaerkh>
 License: Apache 2.0
 ==============================================================================
-Table of Contents                                           *contents*
+Table of Contents                                 *workspace-contents*
 
-1.   Sensible Settings        |sensible-settings|
+1.   Sensible Settings        |workspace-sensible-settings|
 2.   Workspace Sessions       |workspace-sessions|
-2.1. Hidden Buffers           |hidden-buffers|
-2.2. Undo History             |undo-history|
-2.3. Omni Completion          |omni-completion|
-3.   Autosave                 |autosave|
-3.1. Untrailing Spaces        |untrailing-spaces|
-3.2. Autosave Ignore List     |autosave-ignore-list|
+2.1. Hidden Buffers           |workspace-hidden-buffers|
+2.2. Undo History             |workspace-undo-history|
+2.3. Omni Completion          |workspace-omni-completion|
+3.   Autosave                 |workspace-autosave|
+3.1. Untrailing Spaces        |workspace-untrailing-spaces|
+3.2. Autosave Ignore List     |workspace-autosave-ignore-list|
 
 ==============================================================================
-1. Sensible Settings                               *sensible-settings*
+1. Sensible Settings                     *workspace-sensible-settings*
 This plugin comes with carefully selected settings that everybody can agree
 with (i.e. syntax on, set ruler), are unobtrusive (i.e. foldmethod is set with
 nofoldenable), or are hidden gems in Vim (i.e. recursive search with set
@@ -48,13 +48,13 @@ default session name set by Vim, but can be changed with this configuration:
 `let g:workspace_session_name = 'Session.vim'`
 
 ------------------------------------------------------------------------------
-2.1. Hidden Buffers                                   *hidden-buffers*
+2.1. Hidden Buffers                         *workspace-hidden-buffers*
 Over time, hidden buffers can build up to a point where most are unnecessary,
 with only those currently tied to a tab window being important.
 When called, the command `CloseHiddenBuffers` closes these hidden buffers.
 
 ------------------------------------------------------------------------------
-2.2. Undo History                                       *undo-history*
+2.2. Undo History                             *workspace-undo-history*
 
 When in a workspace, file undo history is persisted between sessions, without
 needing to keep Vim on.
@@ -67,17 +67,18 @@ default can be explicitly configured, and is set to the following:
 `let g:workspace_undodir='.undodir'`
 
 ------------------------------------------------------------------------------
-2.3. Omni Completion                                 *omni-completion*
+2.3. Omni Completion                       *workspace-omni-completion*
 
 Vim comes with omni completion since 7.2 (packaged with SyntaxComplete plugin).
 Many filetypes also come with omni completion set (i.e. Python), but the default
-omnifunc behaviour is clunky and substandard. Preview windows are set to appear
-by default, and will close on InsertLeave (as opposed to sticking around).
+omnifunc behaviour is clunky and substandard.
+Preview windows are set to appear by default, and will close on InsertLeave, to
+mitigate the default behaviour of being an orphaned window.
 Completion menu settings have also been tweaked to give more predictive
 behaviour.
 
 ==============================================================================
-3. Autosave                                                 *autosave*
+3. Autosave                                       *workspace-autosave*
 Files edited in a workspace session will autosave on InsertLeave, CursorHold,
 FocusLost, FocusGained, and BufLeave. This will cover most autosave cases in an
 unobtrusive manner.
@@ -96,14 +97,14 @@ wolud like your own time configuration, customize the following in your vimrc:
 `set updatetime=4000`
 
 ------------------------------------------------------------------------------
-3.1. Untrailing Spaces                             *untrailing-spaces*
+3.1. Untrailing Spaces                   *workspace-untrailing-spaces*
 
 By default, all trailing spaces will be removed upon autosave.
 If you don't prefer this behaviour, add this line:
 `let g:workspace_autosave_untrailspaces = 0`
 
 ------------------------------------------------------------------------------
-3.2. Autosave Ignore List                       *autosave-ignore-list*
+3.2. Autosave Ignore List             *workspace-autosave-ignore-list*
 
 Git commit filetypes won't autosave (or trim trailing spaces) by default.
 
