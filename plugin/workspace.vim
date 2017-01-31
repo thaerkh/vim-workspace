@@ -46,7 +46,7 @@ function! s:SetSensibleSettings()
     set laststatus=2
     set linebreak
     set list
-    set listchars=extends:>,precedes:<
+    set listchars=extends:>,precedes:<,tab:\|\ ,trail:·
     set number
     set ruler
 
