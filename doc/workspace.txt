@@ -10,6 +10,7 @@ Table of Contents                                 *workspace-contents*
 2.1. Hidden Buffers           |workspace-hidden-buffers|
 2.2. Undo History             |workspace-undo-history|
 2.3. Omni Completion          |workspace-omni-completion|
+2.4. Indent Guides            |workspace-indent-guides|
 3.   Autosave                 |workspace-autosave|
 3.1. Untrailing Spaces        |workspace-untrailing-spaces|
 3.2. Autosave Ignore List     |workspace-autosave-ignore-list|
@@ -72,10 +73,24 @@ default can be explicitly configured, and is set to the following:
 Vim comes with omni completion since 7.2 (packaged with SyntaxComplete plugin).
 Many filetypes also come with omni completion set (i.e. Python), but the default
 omnifunc behaviour is clunky and substandard.
+
 Preview windows are set to appear by default, and will close on InsertLeave, to
 mitigate the default behaviour of being an orphaned window.
+
 Completion menu settings have also been tweaked to give more predictive
 behaviour.
+
+------------------------------------------------------------------------------
+2.4. Indent Guides                           *workspace-indent-guides*
+
+Add the following if you would like to have indent guides for your files:
+`let g:workspace_indent_guides = 1`
+
+Manually calling the command `ToggleIndentGuides` will toggle indent guides
+scoped to a specific buffer.
+
+Space indents are visually identified by the "┆" character, while tabs are
+distinguished by "|".
 
 ==============================================================================
 3. Autosave                                       *workspace-autosave*

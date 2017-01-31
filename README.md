@@ -46,6 +46,15 @@ let g:workspace_undodir='.undodir'
 #### Omni Completion
 Vim's omni completion is enabled by default. Any preview windows will automatically close on InsertLeave.
 
+#### Indent Guides
+Add the following if you would like to have indent guides for your files:
+```
+let g:workspace_indent_guides = 1
+```
+Manually calling the command `ToggleIndentGuides` will toggle indent guides scoped to a specific buffer.
+
+Space indents are visually identified by the "┆" character, while tabs are distinguished by "|".
+
 ## Autosave
 Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).
 

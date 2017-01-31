@@ -10,13 +10,15 @@ let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit', 'gitrebase'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 4)
-let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)  " off by default
-let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0) " off by default
+let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)
+let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
+let g:workspace_indent_guides = get(g:, 'workspace_indent_guides', 0)
 
 
 function! s:SetSensibleSettings()
   " Needed for plugin features
   set completeopt=menuone,longest,preview
+  set encoding=utf-8
   set omnifunc=syntaxcomplete#Complete
   set sessionoptions-=options
 
@@ -27,7 +29,6 @@ function! s:SetSensibleSettings()
     set nocompatible
     set clipboard=unnamedplus
     set complete-=i
-    set encoding=utf-8
     set path+=**
     set updatetime=1000
     set wildmenu
@@ -43,6 +44,8 @@ function! s:SetSensibleSettings()
     set incsearch
     set laststatus=2
     set linebreak
+    set list
+    set listchars=extends:>,precedes:<
     set number
     set ruler
 
@@ -194,17 +197,51 @@ function! s:SetUndoDir()
   endif
 endfunction
 
+function! s:ToggleIndentGuides(user_initiated)
+  if !g:workspace_indent_guides && !a:user_initiated
+    return
+  end
+
+  if get(b:, 'toggle_indent_guides', 1)
+    execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
+    execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
+    execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
+    execute 'syntax match IndentGuideDraw /\(^\|\ \{'.(&l:shiftwidth - 1).'}\)\zs / contained conceal cchar=┆'
+
+    " TODO-TK: local and global listchars are the same, and s: variables are failing (??)
+    let g:original_listchars = get(g:, 'original_listchars', &g:listchars)
+    let &g:listchars = &g:listchars . ',tab:| ,trail:·'
+
+    setlocal concealcursor=inc
+    setlocal conceallevel=2
+    setlocal list
+
+    let b:toggle_indent_guides = 0
+  else
+    syntax clear IndentGuideSpaces
+    syntax clear IndentGuideDraw
+
+    let &l:conceallevel = &g:conceallevel
+    let &l:concealcursor = &g:concealcursor
+    let &g:listchars = g:original_listchars
+    setlocal nolist
+    let b:toggle_indent_guides = 1
+  endif
+endfunction
+
 function! s:PostLoadCleanup()
   if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endfunction
 
 augroup Workspace
+  au! BufWinEnter * call s:ToggleIndentGuides(0)
   au! VimEnter * nested call s:LoadWorkspace()
   au! VimLeave * call s:MakeWorkspace(0)
   au! InsertLeave * if pumvisible() == 0|pclose|endif
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
 
+command! ToggleIndentGuides call s:ToggleIndentGuides(1)
 command! ToggleWorkspace call s:ToggleWorkspace()
 command! WorkspaceExists call s:WorkspaceExists()
 command! CloseHiddenBuffers call s:CloseHiddenBuffers()
