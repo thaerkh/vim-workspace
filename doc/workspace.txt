@@ -12,8 +12,9 @@ Table of Contents                                 *workspace-contents*
 2.3. Omni Completion          |workspace-omni-completion|
 3.   Autosave                 |workspace-autosave|
 3.1. Untrailing Spaces        |workspace-untrailing-spaces|
-3.2. Autosave Ignore List     |workspace-autosave-ignore-list|
-4.   Indent Guides            |workspace-indent-guides|
+3.2. Ignore List              |workspace-autosave-ignorelist|
+4.   Indent Guides            |workspace-indentguides|
+4.1. Ignore List              |workspace-indentguides-ignorelist|
 
 ==============================================================================
 1. Sensible Settings                     *workspace-sensible-settings*
@@ -107,7 +108,7 @@ If you don't prefer this behaviour, add this line:
 `let g:workspace_autosave_untrailspaces = 0`
 
 ------------------------------------------------------------------------------
-3.2. Autosave Ignore List             *workspace-autosave-ignore-list*
+3.2. Ignore List                       *workspace-autosave-ignorelist*
 
 Git commit filetypes won't autosave (or trim trailing spaces) by default.
 
@@ -115,7 +116,7 @@ You can customize the ignore list as follows:
 `let g:workspace_autosave_ignore = ['gitcommit']`
 
 ==============================================================================
-4. Indent Guides                             *workspace-indent-guides*
+4. Indent Guides                              *workspace-indentguides*
 
 Add the following if you would like to have indent guides for your files:
 `let g:workspace_indentguides = 1`
@@ -126,8 +127,9 @@ scoped to a specific buffer.
 Space indents are visually identified by the "┆" character, while tabs are
 distinguished by "|".
 
+------------------------------------------------------------------------------
+4.1. Ignore List                   *workspace-indentguides-ignorelist*
+
 If there are any files you would like to not add indent guides for, add the
 filetype to a list:
-```
-let g:workspace_indentguides_ignore = []
-```
+`let g:workspace_indentguides_ignore = []`

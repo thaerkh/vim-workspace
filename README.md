@@ -63,7 +63,7 @@ By default, all trailing spaces are trimmed before a buffer is autosaved. If you
 let g:workspace_autosave_untrailspaces = 0
 ```
 
-#### Autosave Ignore List
+#### Ignore List
 Git commit filetypes won't autosave (or trim trailing spaces) by default. You can customize the ignore list with this line:
 ```
 let g:workspace_autosave_ignore = ['gitcommit']
@@ -78,6 +78,7 @@ Manually calling the command `ToggleIndentGuides` will toggle indent guides scop
 
 Space indents are visually identified by the "┆" character, while tabs are distinguished by "|".
 
+#### Ignore List
 If there are any files you would like to not add indent guides for, add the filetype to a list:
 ```
 let g:workspace_indentguides_ignore = []
