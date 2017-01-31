@@ -154,7 +154,7 @@ function! s:UntrailSpaces()
 endfunction
 
 function! s:Autosave(timed)
-  if index(g:workspace_autosave_ignore, &filetype) != -1
+  if index(g:workspace_autosave_ignore, &filetype) != -1 || &readonly
     return
   endif
 
