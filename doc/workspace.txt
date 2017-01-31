@@ -118,10 +118,16 @@ You can customize the ignore list as follows:
 4. Indent Guides                             *workspace-indent-guides*
 
 Add the following if you would like to have indent guides for your files:
-`let g:workspace_indent_guides = 1`
+`let g:workspace_indentguides = 1`
 
 Manually calling the command `ToggleIndentGuides` will toggle indent guides
 scoped to a specific buffer.
 
 Space indents are visually identified by the "┆" character, while tabs are
 distinguished by "|".
+
+If there are any files you would like to not add indent guides for, add the
+filetype to a list:
+```
+let g:workspace_indentguides_ignore = []
+```
