@@ -12,7 +12,8 @@ let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspac
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 4)
 let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
-let g:workspace_indent_guides = get(g:, 'workspace_indent_guides', 0)
+let g:workspace_indentguides = get(g:, 'workspace_indentguides', 0)
+let g:workspace_indentguides_ignore  = get(g:, 'workspace_indentguides_ignore', [])
 
 
 function! s:SetSensibleSettings()
@@ -198,11 +199,14 @@ function! s:SetUndoDir()
 endfunction
 
 function! s:ToggleIndentGuides(user_initiated)
-  if !g:workspace_indent_guides && !a:user_initiated
+  if !g:workspace_indentguides && !a:user_initiated
     return
   end
+  if index(g:workspace_indentguides_ignore, &filetype) != -1
+    return
+  endif
 
-  if get(b:, 'toggle_indent_guides', 1)
+  if get(b:, 'toggle_indentguides', 1)
     execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
     execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
     execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
@@ -216,7 +220,7 @@ function! s:ToggleIndentGuides(user_initiated)
     setlocal conceallevel=2
     setlocal list
 
-    let b:toggle_indent_guides = 0
+    let b:toggle_indentguides = 0
   else
     syntax clear IndentGuideSpaces
     syntax clear IndentGuideDraw
@@ -225,7 +229,7 @@ function! s:ToggleIndentGuides(user_initiated)
     let &l:concealcursor = &g:concealcursor
     let &g:listchars = g:original_listchars
     setlocal nolist
-    let b:toggle_indent_guides = 1
+    let b:toggle_indentguides = 1
   endif
 endfunction
 
