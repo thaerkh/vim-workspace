@@ -202,7 +202,7 @@ function! s:ToggleIndentGuides(user_initiated)
   if !g:workspace_indentguides && !a:user_initiated
     return
   end
-  if index(g:workspace_indentguides_ignore, &filetype) != -1
+  if index(g:workspace_indentguides_ignore, &filetype) != -1 && !a:user_initiated
     return
   endif
 
