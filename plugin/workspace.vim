@@ -210,7 +210,7 @@ function! s:ToggleIndentGuides(user_initiated)
     execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
     execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
     execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
-    execute 'syntax match IndentGuideDraw /\(^\|\ \{'.(&l:shiftwidth - 1).'}\)\zs / contained conceal cchar=┆'
+    execute printf('syntax match IndentGuideDraw /\(^\|\ \)\{%i}\zs / contained conceal cchar=┆', &l:shiftwidth - 1)
 
     " TODO-TK: local and global listchars are the same, and s: variables are failing (??)
     let g:original_listchars = get(g:, 'original_listchars', &g:listchars)
