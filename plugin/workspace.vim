@@ -199,14 +199,15 @@ function! s:SetUndoDir()
 endfunction
 
 function! s:ToggleIndentGuides(user_initiated)
-  if !g:workspace_indentguides && !a:user_initiated
-    return
-  end
-  if index(g:workspace_indentguides_ignore, &filetype) != -1 && !a:user_initiated
-    return
+  let b:toggle_indentguides = get(b:, 'toggle_indentguides', 1)
+
+  if !a:user_initiated
+    if !g:workspace_indentguides || index(g:workspace_indentguides_ignore, &filetype) != -1 || !b:toggle_indentguides
+      return
+    endif
   endif
 
-  if get(b:, 'toggle_indentguides', 1)
+  if b:toggle_indentguides
     execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
     execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
     execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
