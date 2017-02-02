@@ -198,6 +198,20 @@ function! s:SetUndoDir()
   endif
 endfunction
 
+function! s:SetIndentGuideHighlights(user_initiated)
+  if g:workspace_indentguides && index(g:workspace_indentguides_ignore, &filetype) == -1
+    if !a:user_initiated
+      silent! syntax clear IndentGuideSpaces
+      silent! syntax clear IndentGuideDraw
+    endif
+    execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
+    execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
+    execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
+    execute printf('syntax match IndentGuideDraw /^\zs\ \ze\ \{%i}/ contained conceal cchar=┆', &l:shiftwidth - 1)
+    execute printf('syntax match IndentGuideDraw /\ \{%i}\zs \ze/ contained conceal cchar=┆', &l:shiftwidth - 1)
+  endif
+endfunction
+
 function! s:ToggleIndentGuides(user_initiated)
   let b:toggle_indentguides = get(b:, 'toggle_indentguides', 1)
 
@@ -208,10 +222,7 @@ function! s:ToggleIndentGuides(user_initiated)
   endif
 
   if b:toggle_indentguides
-    execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
-    execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
-    execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
-    execute printf('syntax match IndentGuideDraw /\(^\|\ \)\{%i}\zs / contained conceal cchar=┆', &l:shiftwidth - 1)
+    call s:SetIndentGuideHighlights(a:user_initiated)
 
     " TODO-TK: local and global listchars are the same, and s: variables are failing (??)
     let g:original_listchars = get(g:, 'original_listchars', &g:listchars)
@@ -239,6 +250,7 @@ function! s:PostLoadCleanup()
 endfunction
 
 augroup Workspace
+  au! BufRead,ColorScheme * call s:SetIndentGuideHighlights(0)
   au! BufWinEnter * call s:ToggleIndentGuides(0)
   au! VimEnter * nested call s:LoadWorkspace()
   au! VimLeave * call s:MakeWorkspace(0)
