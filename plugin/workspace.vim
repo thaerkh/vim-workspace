@@ -226,12 +226,14 @@ function! s:ToggleIndentGuides(user_initiated)
 
     " TODO-TK: local and global listchars are the same, and s: variables are failing (??)
     let g:original_listchars = get(g:, 'original_listchars', &g:listchars)
-    let &g:listchars = &g:listchars . ',tab:| ,trail:·'
 
+    let listchar_guides = ',tab:| ,trail:·'
+    if &g:listchars !~ listchar_guides
+      let &g:listchars = &g:listchars . listchar_guides
+    endif
     setlocal concealcursor=inc
     setlocal conceallevel=2
     setlocal list
-
     let b:toggle_indentguides = 0
   else
     syntax clear IndentGuideSpaces
