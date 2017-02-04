@@ -199,7 +199,7 @@ function! s:SetUndoDir()
 endfunction
 
 function! s:SetIndentGuideHighlights(user_initiated)
-  if g:workspace_indentguides && index(g:workspace_indentguides_ignore, &filetype) == -1
+  if (g:workspace_indentguides && index(g:workspace_indentguides_ignore, &filetype) == -1) || a:user_initiated
     if !a:user_initiated
       silent! syntax clear IndentGuideSpaces
       silent! syntax clear IndentGuideDraw
