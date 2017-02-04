@@ -13,6 +13,7 @@ let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updateti
 let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_indentguides = get(g:, 'workspace_indentguides', 0)
+let g:workspace_indentguides_firstlevel = get(g:, 'workspace_indentguides_firstlevel', 0)
 let g:workspace_indentguides_ignore  = get(g:, 'workspace_indentguides_ignore', [])
 
 
@@ -206,7 +207,10 @@ function! s:SetIndentGuideHighlights(user_initiated)
     endif
     execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
     execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
-    execute printf('syntax match IndentGuideDraw /^\zs\ \ze\ \{%i}/ containedin=ALL conceal cchar=┆', &l:shiftwidth - 1)
+
+    if g:workspace_indentguides_firstlevel
+      execute printf('syntax match IndentGuideDraw /^\zs\ \ze\ \{%i}/ containedin=ALL conceal cchar=┆', &l:shiftwidth - 1)
+    endif
     execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
     execute printf('syntax match IndentGuideDraw /\ \{%i}\zs \ze/ contained conceal cchar=┆', &l:shiftwidth - 1)
   endif
