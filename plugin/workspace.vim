@@ -206,8 +206,8 @@ function! s:SetIndentGuideHighlights(user_initiated)
     endif
     execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
     execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
+    execute printf('syntax match IndentGuideDraw /^\zs\ \ze\ \{%i}/ containedin=ALL conceal cchar=┆', &l:shiftwidth - 1)
     execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
-    execute printf('syntax match IndentGuideDraw /^\zs\ \ze\ \{%i}/ contained conceal cchar=┆', &l:shiftwidth - 1)
     execute printf('syntax match IndentGuideDraw /\ \{%i}\zs \ze/ contained conceal cchar=┆', &l:shiftwidth - 1)
   endif
 endfunction
