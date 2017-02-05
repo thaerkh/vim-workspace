@@ -5,7 +5,6 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif" >
 </p>
-Automatically manage your Vim session, coupled with tunable autosave features.
 # Features
 ## Sensible Settings
 While `not enabled by default`, this plugin comes available with useful vim settings that everybody can agree on.
