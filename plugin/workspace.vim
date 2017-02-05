@@ -96,7 +96,7 @@ function! s:CloseHiddenBuffers()
 
   for bufnr in range(1, bufnr('$'))
     if bufexists(bufnr) && !has_key(a:visible_buffers,bufnr)
-      execute printf('bdelete %d', bufnr)
+      execute printf('bwipeout %d', bufnr)
     endif
   endfor
 endfunction
