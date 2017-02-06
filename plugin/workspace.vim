@@ -103,17 +103,13 @@ endfunction
 
 function! s:ConfigureWorkspace()
   call s:SetUndoDir()
-  call s:SetAutosave()
+  call s:SetAutosave(1)
 endfunction
 
 function! s:RemoveWorkspace()
   let s:workspace_save_session  = 0
   execute printf('call delete("%s")', g:workspace_session_name)
-  if g:workspace_autosave
-    set noautoread
-    set noautowrite
-    au! WorkspaceToggle * *
-  endif
+  call s:SetAutosave(0)
 endfunction
 
 function! s:ToggleWorkspace()
@@ -177,8 +173,11 @@ function! s:Autosave(timed)
   endif
 endfunction
 
-function! s:SetAutosave()
-  if g:workspace_autosave
+function! s:SetAutosave(enable)
+  if !g:workspace_autosave
+    return
+  endif
+  if a:enable == 1
     set autoread
     set autowrite
     augroup WorkspaceToggle
@@ -186,6 +185,10 @@ function! s:SetAutosave()
       au! CursorHold * call s:Autosave(1)
       au! BufEnter * call s:MakeWorkspace(0)
     augroup END
+  else
+    set noautoread
+    set noautowrite
+    au! WorkspaceToggle * *
   endif
 endfunction
 
