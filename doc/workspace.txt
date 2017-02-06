@@ -94,6 +94,9 @@ within Tmux (i.e. sjl/vitality.vim).
 You can manually enable the autosave feature outside of a workspace session
 with the `ToggleAutosave` command.
 
+If you would like autosave to be always on, even outside of a session, add the
+following to your vimrc: `let g:workspace_autosave_always = 1`
+
 You can explicitly control this feature by setting the configuration to either 1
 (enabled) or 0 (disabled), with the following setting:
 `let g:workspace_autosave = 1`

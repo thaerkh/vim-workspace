@@ -52,6 +52,11 @@ FocusLost and FocusGained triggers will typically trigger only with GUI versions
 
 You can manually enable the autosave feature outside of a workspace session with the `ToggleAutosave` command.
 
+If you would like autosave to be always on, even outside of a session, add the following to your vimrc:
+```
+let g:workspace_autosave_always = 1
+```
+
 The following defaults are shown as configuration examples, if you wish to change feature behaviour:
 ```
 let g:workspace_autosave = 1

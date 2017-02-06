@@ -7,6 +7,7 @@ let g:workspace_session_name = get(g:, 'workspace_session_name', 'Session.vim')
 let g:workspace_undodir = get(g:, 'workspace_undodir', '.undodir')
 let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history', 1)
 let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
+let g:workspace_autosave_always = get(g:, 'workspace_autosave_always', 0)
 let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit', 'gitrebase'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 4)
@@ -109,7 +110,9 @@ endfunction
 function! s:RemoveWorkspace()
   let s:workspace_save_session  = 0
   execute printf('call delete("%s")', g:workspace_session_name)
-  call s:SetAutosave(0)
+  if !g:workspace_autosave_always
+    call s:SetAutosave(0)
+  endif
 endfunction
 
 function! s:ToggleWorkspace()
@@ -277,6 +280,10 @@ augroup Workspace
   au! VimLeave * call s:MakeWorkspace(0)
   au! InsertLeave * if pumvisible() == 0|pclose|endif
   au! SessionLoadPost * call s:PostLoadCleanup()
+augroup END
+
+augroup WorkspaceAutosave
+  au! VimEnter * if g:workspace_autosave_always == 1 | call s:SetAutosave(1) | endif
 augroup END
 
 command! ToggleAutosave call s:ToggleAutosave()
