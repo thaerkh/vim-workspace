@@ -282,7 +282,6 @@ augroup END
 command! ToggleAutosave call s:ToggleAutosave()
 command! ToggleIndentGuides call s:ToggleIndentGuides(1)
 command! ToggleWorkspace call s:ToggleWorkspace()
-command! WorkspaceExists call s:WorkspaceExists()
 command! CloseHiddenBuffers call s:CloseHiddenBuffers()
 
 call s:SetSensibleSettings()
