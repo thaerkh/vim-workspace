@@ -185,10 +185,22 @@ function! s:SetAutosave(enable)
       au! CursorHold * call s:Autosave(1)
       au! BufEnter * call s:MakeWorkspace(0)
     augroup END
+    let s:autosave_on = 1
   else
     set noautoread
     set noautowrite
     au! WorkspaceToggle * *
+    let s:autosave_on = 0
+  endif
+endfunction
+
+function! s:ToggleAutosave()
+  if get(s:, 'autosave_on', 0)
+    call s:SetAutosave(0)
+    echo 'Autosave disabled!'
+  else
+    call s:SetAutosave(1)
+    echo 'Autosave enabled!'
   endif
 endfunction
 
@@ -267,6 +279,7 @@ augroup Workspace
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
 
+command! ToggleAutosave call s:ToggleAutosave()
 command! ToggleIndentGuides call s:ToggleIndentGuides(1)
 command! ToggleWorkspace call s:ToggleWorkspace()
 command! WorkspaceExists call s:WorkspaceExists()
