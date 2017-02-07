@@ -158,7 +158,7 @@ function! s:UntrailSpaces()
 endfunction
 
 function! s:Autosave(timed)
-  if index(g:workspace_autosave_ignore, &filetype) != -1 || &readonly || mode() == 'c'
+  if index(g:workspace_autosave_ignore, &filetype) != -1 || &readonly || mode() == 'c' || pumvisible()
     return
   endif
 
