@@ -119,7 +119,7 @@ function! s:ToggleWorkspace()
   if s:WorkspaceExists()
     call s:RemoveWorkspace()
     execute printf('silent !rm -rf %s', g:workspace_undodir)
-    call feedkeys("") | silent! redraw!
+    call feedkeys("") | silent! redraw!  " Recover view from external comand
     echo 'Workspace removed!'
   else
     call s:MakeWorkspace(1)
@@ -165,13 +165,14 @@ function! s:Autosave(timed)
   let current_time = localtime()
   let s:last_update = get(s:, 'last_update', 0)
   let s:time_delta = current_time - s:last_update
+
   if a:timed == 0 || s:time_delta >= 1
     let s:last_update = current_time
-    checktime
+    checktime  " checktime with autoread will sync files on a last-writer-wins basis.
     call s:UntrailSpaces()
-    silent! update
+    silent! update  " only updates if there are changes to the file.
     if a:timed == 0 || s:time_delta >= g:workspace_autosave_au_updatetime
-      doautocmd BufWritePost %
+      doautocmd BufWritePost %  " Periodically trigger BufWritePost.
     endif
   endif
 endfunction
@@ -239,7 +240,7 @@ function! s:ToggleIndentGuides(user_initiated)
 
   if !a:user_initiated
     if !g:workspace_indentguides || index(g:workspace_indentguides_ignore, &filetype) != -1 || !b:toggle_indentguides
-      return
+      return  " skip if not user initiated, and is either disabled, an ignored filetype, or already toggled on
     endif
   endif
 
