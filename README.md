@@ -43,7 +43,9 @@ let g:workspace_undodir='.undodir'
 ```
 
 #### Omni Completion
-Vim's omni completion is enabled by default. Any preview windows will automatically close on InsertLeave.
+Preview windows are set to appear by default, and will close on InsertLeave, to mitigate the default behaviour of being an orphaned window.
+
+Completion menu settings have also been tweaked to give more predictive behaviour.
 
 ## Autosave
 Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).

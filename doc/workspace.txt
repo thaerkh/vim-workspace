@@ -71,10 +71,6 @@ default can be explicitly configured, and is set to the following:
 ------------------------------------------------------------------------------
 2.3. Omni Completion                       *workspace-omni-completion*
 
-Vim comes with omni completion since 7.2 (packaged with SyntaxComplete plugin).
-Many filetypes also come with omni completion set (i.e. Python), but the default
-omnifunc behaviour is clunky and substandard.
-
 Preview windows are set to appear by default, and will close on InsertLeave, to
 mitigate the default behaviour of being an orphaned window.
 

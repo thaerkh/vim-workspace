@@ -22,7 +22,6 @@ function! s:SetSensibleSettings()
   " Needed for plugin features
   set completeopt=menuone,longest,preview
   set encoding=utf-8
-  set omnifunc=syntaxcomplete#Complete
   set sessionoptions-=options
 
   if g:workspace_sensible_settings
