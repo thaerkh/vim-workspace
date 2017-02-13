@@ -240,7 +240,8 @@ function! s:ToggleIndentGuides(user_initiated)
 
   if !a:user_initiated
     if !g:workspace_indentguides || index(g:workspace_indentguides_ignore, &filetype) != -1 || !b:toggle_indentguides
-      return  " skip if not user initiated, and is either disabled, an ignored filetype, or already toggled on
+      " skip if not user initiated, and is either disabled, an ignored filetype, or already toggled on
+      return
     endif
   endif
 
