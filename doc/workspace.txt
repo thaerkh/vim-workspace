@@ -91,6 +91,8 @@ FocusLost and FocusGained triggers will typically trigger only with GUI versions
 of Vim. However, there are plugins that enables these for the console version
 within Tmux (i.e. sjl/vitality.vim).
 
+This autosave feature enforces a last writer wins policy (eventual consistency).
+
 You can manually enable the autosave feature outside of a workspace session
 with the `ToggleAutosave` command.
 

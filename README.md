@@ -50,6 +50,8 @@ Files edited in a workspace session will autosave on InsertLeave, idle (CursorHo
 
 FocusLost and FocusGained triggers will typically trigger only with GUI versions of Vim. However, there are plugins that enables these for the console version within Tmux (i.e. sjl/vitality.vim).
 
+This autosave feature enforces a last writer wins policy (eventual consistency).
+
 You can manually enable the autosave feature outside of a workspace session with the `ToggleAutosave` command.
 
 If you would like autosave to be always on, even outside of a session, add the following to your vimrc:
