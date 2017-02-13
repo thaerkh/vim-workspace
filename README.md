@@ -80,19 +80,7 @@ let g:workspace_autosave_ignore = ['gitcommit']
 ```
 
 ## Indent Guides
-Add the following if you would like to have indent guides for your files:
-```
-let g:workspace_indentguides = 1
-```
-Manually calling the command `ToggleIndentGuides` will toggle indent guides scoped to a specific buffer.
-
-Space indents are visually identified by the "┆" character, while tabs are distinguished by "|".
-
-#### Ignore List
-If there are any files you would like to not add indent guides for, add the filetype to a list:
-```
-let g:workspace_indentguides_ignore = []
-```
+This feature has been moved to its own plugin [vim-indentguides](https://github.com/thaerkh/vim-indentguides).
 
 # Installation
 This plugin requires Vim 8.0, follows the standard runtime path structure, and can be installed with a variety of plugin managers.

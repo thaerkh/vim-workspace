@@ -13,9 +13,6 @@ let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspac
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 4)
 let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
-let g:workspace_indentguides = get(g:, 'workspace_indentguides', 0)
-let g:workspace_indentguides_firstlevel = get(g:, 'workspace_indentguides_firstlevel', 0)
-let g:workspace_indentguides_ignore  = get(g:, 'workspace_indentguides_ignore', [])
 
 
 function! s:SetSensibleSettings()
@@ -217,66 +214,11 @@ function! s:SetUndoDir()
   endif
 endfunction
 
-function! s:SetIndentGuideHighlights(user_initiated)
-  if (g:workspace_indentguides && index(g:workspace_indentguides_ignore, &filetype) == -1) || a:user_initiated
-    if !a:user_initiated
-      silent! syntax clear IndentGuideSpaces
-      silent! syntax clear IndentGuideDraw
-    endif
-    execute "highlight Conceal ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
-    execute "highlight SpecialKey ctermfg=238 ctermbg=NONE guifg=Grey27 guibg=NONE"
-
-    if g:workspace_indentguides_firstlevel
-      execute printf('syntax match IndentGuideDraw /^\zs\ \ze\ \{%i}/ containedin=ALL conceal cchar=┆', &l:shiftwidth - 1)
-    endif
-    execute 'syntax match IndentGuideSpaces /^\ \+/ containedin=ALL contains=IndentGuideDraw keepend'
-    execute printf('syntax match IndentGuideDraw /\ \{%i}\zs \ze/ contained conceal cchar=┆', &l:shiftwidth - 1)
-  endif
-endfunction
-
-function! s:ToggleIndentGuides(user_initiated)
-  let b:toggle_indentguides = get(b:, 'toggle_indentguides', 1)
-
-  if !a:user_initiated
-    if !g:workspace_indentguides || index(g:workspace_indentguides_ignore, &filetype) != -1 || !b:toggle_indentguides
-      " skip if not user initiated, and is either disabled, an ignored filetype, or already toggled on
-      return
-    endif
-  endif
-
-  if b:toggle_indentguides
-    call s:SetIndentGuideHighlights(a:user_initiated)
-
-    " TODO-TK: local and global listchars are the same, and s: variables are failing (??)
-    let g:original_listchars = get(g:, 'original_listchars', &g:listchars)
-
-    let listchar_guides = ',tab:| ,trail:·'
-    if &g:listchars !~ listchar_guides
-      let &g:listchars = &g:listchars . listchar_guides
-    endif
-    setlocal concealcursor=inc
-    setlocal conceallevel=2
-    setlocal list
-    let b:toggle_indentguides = 0
-  else
-    syntax clear IndentGuideSpaces
-    syntax clear IndentGuideDraw
-
-    let &l:conceallevel = &g:conceallevel
-    let &l:concealcursor = &g:concealcursor
-    let &g:listchars = g:original_listchars
-    setlocal nolist
-    let b:toggle_indentguides = 1
-  endif
-endfunction
-
 function! s:PostLoadCleanup()
   if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endfunction
 
 augroup Workspace
-  au! BufRead,ColorScheme * call s:SetIndentGuideHighlights(0)
-  au! BufWinEnter * call s:ToggleIndentGuides(0)
   au! VimEnter * nested call s:LoadWorkspace()
   au! VimLeave * call s:MakeWorkspace(0)
   au! InsertLeave * if pumvisible() == 0|pclose|endif
@@ -288,7 +230,6 @@ augroup WorkspaceAutosave
 augroup END
 
 command! ToggleAutosave call s:ToggleAutosave()
-command! ToggleIndentGuides call s:ToggleIndentGuides(1)
 command! ToggleWorkspace call s:ToggleWorkspace()
 command! CloseHiddenBuffers call s:CloseHiddenBuffers()
 
