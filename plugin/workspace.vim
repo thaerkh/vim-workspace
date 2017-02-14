@@ -89,6 +89,7 @@ function! s:LoadWorkspace()
   if s:WorkspaceExists()
     let s:workspace_save_session = 1
     let a:filename = expand(@%)
+    set nocompatible
     execute 'source ' . g:workspace_session_name
     call s:ConfigureWorkspace()
     call s:FindOrNew(a:filename)
