@@ -6,13 +6,6 @@
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/demo.gif" >
 </p>
 # Features
-## Sensible Settings
-While `not enabled by default`, this plugin comes available with useful vim settings that everybody can agree on.
-
-If you would like to enable these settings (viewable in `plugin/workspace.vim`), add the following to your vimrc:
-```
-let g:workspace_sensible_settings = 1
-```
 ## Workspace Sessions
 #### Persistent Vim Session
 Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
@@ -43,9 +36,7 @@ let g:workspace_undodir='.undodir'
 ```
 
 #### Omni Completion
-Preview windows are set to appear by default, and will close on InsertLeave, to mitigate the default behaviour of being an orphaned window.
-
-Completion menu settings have also been tweaked to give more predictive behaviour.
+Preview windows will close on InsertLeave, to mitigate the default behaviour of being an orphaned window.
 
 ## Autosave
 Files edited in a workspace session will autosave on InsertLeave, idle (CursorHold), pane switches (FocusLost and FocusGained), or buffer switches (BufLeave).

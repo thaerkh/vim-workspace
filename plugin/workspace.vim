@@ -11,51 +11,8 @@ let g:workspace_autosave_always = get(g:, 'workspace_autosave_always', 0)
 let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit', 'gitrebase'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 4)
-let g:workspace_sensible_settings = get(g:, 'workspace_sensible_settings', 0)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 
-
-function! s:SetSensibleSettings()
-  " Needed for plugin features
-  set completeopt=menuone,longest,preview
-  set encoding=utf-8
-  set sessionoptions-=options
-
-  if g:workspace_sensible_settings
-    " Environment behaviour
-    filetype plugin indent on
-    syntax on
-    set nocompatible
-    set clipboard=unnamedplus
-    set complete-=i
-    set path+=**
-    set updatetime=1000
-    set wildmenu
-    set wildmode=list:longest,full
-
-    if !has('nvim')
-      set swapsync=""
-    endif
-
-    " Editor view
-    set foldmethod=indent
-    set nofoldenable
-    set incsearch
-    set laststatus=2
-    set linebreak
-    set list
-    set listchars=extends:>,precedes:<,tab:\|\ ,trail:·
-    set number
-    set ruler
-
-    " Editing behaviour
-    set autoindent
-    set backspace=indent,eol,start
-    set smarttab
-
-    nnoremap Q <Nop>
-  endif
-endfunction
 
 function! s:WorkspaceExists()
   return filereadable(g:workspace_session_name)
@@ -142,6 +99,7 @@ function! s:LoadWorkspace()
       let s:workspace_save_session = 0
     endif
   endif
+  set sessionoptions-=options
 endfunction
 
 function! s:UntrailSpaces()
@@ -232,7 +190,5 @@ augroup END
 command! ToggleAutosave call s:ToggleAutosave()
 command! ToggleWorkspace call s:ToggleWorkspace()
 command! CloseHiddenBuffers call s:CloseHiddenBuffers()
-
-call s:SetSensibleSettings()
 
 " vim: ts=2 sw=2 et
