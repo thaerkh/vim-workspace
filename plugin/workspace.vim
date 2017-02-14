@@ -137,8 +137,10 @@ function! s:SetAutosave(enable)
     return
   endif
   if a:enable == 1
+    let s:autoread = &autoread
+    let s:autowriteall = &autowriteall
     set autoread
-    set autowrite
+    set autowriteall
     augroup WorkspaceToggle
       au! BufLeave,FocusLost,FocusGained,InsertLeave * call s:Autosave(0)
       au! CursorHold * call s:Autosave(1)
@@ -146,8 +148,8 @@ function! s:SetAutosave(enable)
     augroup END
     let s:autosave_on = 1
   else
-    set noautoread
-    set noautowrite
+    let &autoread = s:autoread
+    let &autowriteall = s:autowriteall
     au! WorkspaceToggle * *
     let s:autosave_on = 0
   endif
