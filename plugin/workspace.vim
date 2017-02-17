@@ -82,7 +82,7 @@ function! s:ToggleWorkspace()
 endfunction
 
 function! s:LoadWorkspace()
-  if index(g:workspace_autosave_ignore, &filetype) != -1
+  if index(g:workspace_autosave_ignore, &filetype) != -1 || get(s:, 'read_from_stdin', 0)
     return
   endif
 
@@ -181,6 +181,7 @@ endfunction
 
 augroup Workspace
   au! VimEnter * nested call s:LoadWorkspace()
+  au! StdinReadPost * let s:read_from_stdin = 1
   au! VimLeave * call s:MakeWorkspace(0)
   au! InsertLeave * if pumvisible() == 0|pclose|endif
   au! SessionLoadPost * call s:PostLoadCleanup()
