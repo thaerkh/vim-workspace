@@ -10,7 +10,7 @@ let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_always = get(g:, 'workspace_autosave_always', 0)
 let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit', 'gitrebase'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
-let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 4)
+let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 3)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 
 
