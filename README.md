@@ -55,10 +55,9 @@ If you would like autosave to be always on, even outside of a session, add the f
 let g:workspace_autosave_always = 1
 ```
 
-The following defaults are shown as configuration examples, if you wish to change feature behaviour:
+If you would like to disable autosave for some reason (i.e. too much IO on disk), it can be disabled as shown here:
 ```
 let g:workspace_autosave = 1
-set updatetime=4000  " Default Vim setting (specifies CursorHold wait time).
 ```
 
 #### Untrailing Spaces
