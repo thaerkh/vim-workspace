@@ -12,6 +12,7 @@ let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcomm
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 3)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
+let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
 
 
 function! s:WorkspaceExists()
@@ -89,7 +90,7 @@ function! s:LoadWorkspace()
   if s:WorkspaceExists()
     let s:workspace_save_session = 1
     let a:filename = expand(@%)
-    set nocompatible
+    if g:workspace_nocompatible | set nocompatible | endif
     execute 'source ' . g:workspace_session_name
     call s:ConfigureWorkspace()
     call s:FindOrNew(a:filename)
