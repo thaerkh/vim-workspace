@@ -125,10 +125,10 @@ function! s:Autosave(timed)
     let s:last_update = current_time
     checktime  " checktime with autoread will sync files on a last-writer-wins basis.
     call s:UntrailSpaces()
-    doautocmd BufWritePre %  " needed for soft checks
+    silent! doautocmd BufWritePre %  " needed for soft checks
     silent! update  " only updates if there are changes to the file.
     if a:timed == 0 || s:time_delta >= g:workspace_autosave_au_updatetime
-      doautocmd BufWritePost %  " Periodically trigger BufWritePost.
+      silent! doautocmd BufWritePost %  " Periodically trigger BufWritePost.
     endif
   endif
 endfunction
