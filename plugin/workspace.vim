@@ -14,15 +14,22 @@ let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updateti
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
 
-
 function! s:WorkspaceExists()
   return filereadable(g:workspace_session_name)
+endfunction
+
+function! s:IsAbsolutePath(path)
+  return (fnamemodify(a:path, ':p') == a:path)
 endfunction
 
 function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
-    execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
+    if s:IsAbsolutePath(g:workspace_session_name)
+      execute printf('mksession! %s', g:workspace_session_name)
+    else
+      execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
+    endif
   endif
 endfunction
 
