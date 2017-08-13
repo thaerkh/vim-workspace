@@ -148,9 +148,13 @@ function! s:SetAutosave(enable)
   if a:enable == 1
     let s:autoread = &autoread
     let s:autowriteall = &autowriteall
+    let s:swapfile  = &swapfile
+    let s:swapsync = &swapsync
     let s:updatetime = &updatetime
     set autoread
     set autowriteall
+    set noswapfile
+    set swapsync=""
     set updatetime=1000
     augroup WorkspaceToggle
       au! BufLeave,FocusLost,FocusGained,InsertLeave * call s:Autosave(0)
@@ -162,6 +166,8 @@ function! s:SetAutosave(enable)
     let &autoread = s:autoread
     let &autowriteall = s:autowriteall
     let &updatetime = s:updatetime
+    let &swapfile = s:swapfile
+    let &swapsync = s:swapsync
     au! WorkspaceToggle * *
     let s:autosave_on = 0
   endif
