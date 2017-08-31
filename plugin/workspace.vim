@@ -154,7 +154,9 @@ function! s:SetAutosave(enable)
     set autoread
     set autowriteall
     set noswapfile
-    set swapsync=""
+    if !has('nvim')
+      set swapsync=""
+    endif
     set updatetime=1000
     augroup WorkspaceToggle
       au! BufLeave,FocusLost,FocusGained,InsertLeave * call s:Autosave(0)
@@ -167,7 +169,9 @@ function! s:SetAutosave(enable)
     let &autowriteall = s:autowriteall
     let &updatetime = s:updatetime
     let &swapfile = s:swapfile
-    let &swapsync = s:swapsync
+    if !has('nvim')
+      let &swapsync = s:swapsync
+    endif
     au! WorkspaceToggle * *
     let s:autosave_on = 0
   endif
