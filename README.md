@@ -57,7 +57,7 @@ let g:workspace_autosave_always = 1
 
 If you would like to disable autosave for some reason (i.e. too much IO on disk), it can be disabled as shown here:
 ```
-let g:workspace_autosave = 1
+let g:workspace_autosave = 0
 ```
 
 #### Untrailing Spaces
