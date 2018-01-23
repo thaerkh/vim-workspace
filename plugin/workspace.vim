@@ -4,6 +4,7 @@
 " URL:     https://github.com/thaerkh/vim-workspace
 
 let g:workspace_session_name = get(g:, 'workspace_session_name', 'Session.vim')
+let g:workspace_session_disable_on_args = get(g:, 'workspace_session_disable_on_args', 0)
 let g:workspace_undodir = get(g:, 'workspace_undodir', '.undodir')
 let g:workspace_persist_undo_history = get(g:, 'workspace_persist_undo_history', 1)
 let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
@@ -90,7 +91,7 @@ function! s:ToggleWorkspace()
 endfunction
 
 function! s:LoadWorkspace()
-  if index(g:workspace_autosave_ignore, &filetype) != -1 || get(s:, 'read_from_stdin', 0)
+  if index(g:workspace_autosave_ignore, &filetype) != -1 || get(s:, 'read_from_stdin', 0) || (g:workspace_session_disable_on_args && argc() != 0)
     return
   endif
 
