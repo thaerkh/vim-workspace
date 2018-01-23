@@ -24,6 +24,11 @@ The following default can be configured if you wish to change the session name:
 let g:workspace_session_name = 'Session.vim'
 ```
 
+If you'd like sessions to not load if you're explicitly loading a file in a workspace directory (as opposed to an argument-less `vim`), the following in your vimrc will provide that behaviour:
+```
+let g:workspace_session_disable_on_args = 1
+```
+
 #### Hidden Buffers
 Over time, hidden buffers can build up to a point where most are unnecessary, with only those currently tied to a tab window being important.
 When called, the command `CloseHiddenBuffers` will close any hidden buffers meeting this criteria.
