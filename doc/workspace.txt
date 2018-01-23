@@ -34,6 +34,11 @@ The Vim session will be stored in your directory. The filename is set to the
 default session name set by Vim, but can be changed with this configuration:
 `let g:workspace_session_name = 'Session.vim'`
 
+If you'd like sessions to not load if you're explicitly loading a file
+in a workspace directory (as opposed to an argument-less `vim`), the following
+in your vimrc will provide that behaviour:
+`let g:workspace_session_disable_on_args = 1`
+
 ------------------------------------------------------------------------------
 1.1. Hidden Buffers                         *workspace-hidden-buffers*
 Over time, hidden buffers can build up to a point where most are unnecessary,
