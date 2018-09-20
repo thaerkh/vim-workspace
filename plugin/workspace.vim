@@ -14,9 +14,33 @@ let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspac
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 3)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
+let g:workspace_session_directory = get(g:, 'workspace_session_directory', '')
+
+function! s:IsSessionDirectoryUsed()
+  return !empty(g:workspace_session_directory)
+endfunction
+
+function! s:GetSessionDirectoryPath()
+	let l:sessionDirectory = g:workspace_session_directory
+  if !isdirectory(g:workspace_session_directory)
+    call mkdir(g:workspace_session_directory)
+  endif
+	let l:cwd = getcwd()
+	let l:fileName = substitute(l:cwd, "/", '-', "g")
+	let l:fullPath = l:sessionDirectory . l:fileName
+	return l:fullPath
+endfunction
+
+function! s:GetSessionName()
+  if s:IsSessionDirectoryUsed()
+    return s:GetSessionDirectoryPath()
+  else
+    return g:workspace_session_name
+  endif
+endfunction
 
 function! s:WorkspaceExists()
-  return filereadable(g:workspace_session_name)
+  return filereadable(s:GetSessionName())
 endfunction
 
 function! s:IsAbsolutePath(path)
@@ -26,7 +50,9 @@ endfunction
 function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
-    if s:IsAbsolutePath(g:workspace_session_name)
+    if s:IsSessionDirectoryUsed()
+      execute printf('mksession! %s', s:GetSessionDirectoryPath())
+    elseif s:IsAbsolutePath(g:workspace_session_name)
       execute printf('mksession! %s', g:workspace_session_name)
     else
       execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
@@ -71,7 +97,7 @@ endfunction
 
 function! s:RemoveWorkspace()
   let s:workspace_save_session  = 0
-  execute printf('call delete("%s")', g:workspace_session_name)
+  execute printf('call delete("%s")', s:GetSessionName())
   if !g:workspace_autosave_always
     call s:SetAutosave(0)
   endif
@@ -99,7 +125,7 @@ function! s:LoadWorkspace()
     let s:workspace_save_session = 1
     let a:filename = expand(@%)
     if g:workspace_nocompatible | set nocompatible | endif
-    execute 'source ' . g:workspace_session_name
+    execute 'source ' . s:GetSessionName()
     call s:ConfigureWorkspace()
     call s:FindOrNew(a:filename)
   else
