@@ -115,7 +115,7 @@ endfunction
 function! s:UntrailSpaces()
   if g:workspace_autosave_untrailspaces && &modifiable
     let curr_row = line('.')
-    let curr_col = virtcol('.')
+    let curr_col = col('.')
     execute 's/\ \+$//e'
     cal cursor(curr_row, curr_col)
   endif
