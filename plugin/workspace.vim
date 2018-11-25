@@ -14,6 +14,7 @@ let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspac
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 3)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
+let g:workspace_create_new_tabs = get(g:, 'workspace_use_buffer', 1)
 
 function! s:WorkspaceExists()
   return filereadable(g:workspace_session_name)
@@ -36,16 +37,18 @@ endfunction
 
 function! s:FindOrNew(filename)
   let a:bufnr = bufnr(a:filename)
-  for tabnr in range(1, tabpagenr("$"))
-    for bufnr in tabpagebuflist(tabnr)
-      if (bufnr == a:bufnr)
-        execute 'tabn ' . tabnr
-        call win_gotoid(win_findbuf(a:bufnr)[0])
-        return
-      endif
+  if g:workspace_create_new_tabs
+    for tabnr in range(1, tabpagenr("$"))
+      for bufnr in tabpagebuflist(tabnr)
+        if (bufnr == a:bufnr)
+          execute 'tabn ' . tabnr
+          call win_gotoid(win_findbuf(a:bufnr)[0])
+          return
+        endif
+      endfor
     endfor
-  endfor
-  tabnew
+    tabnew
+  endif
   execute 'buffer ' . a:bufnr
 endfunction
 
