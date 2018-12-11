@@ -24,10 +24,10 @@ function! s:GetSessionDirectoryPath()
   if !isdirectory(g:workspace_session_directory)
     call mkdir(g:workspace_session_directory)
   endif
-	let l:cwd = getcwd()
-	let l:fileName = substitute(l:cwd, "/", '%', "g")
-	let l:fullPath = g:workspace_session_directory . l:fileName
-	return l:fullPath
+  let l:cwd = getcwd()
+  let l:fileName = substitute(l:cwd, "/", '%', "g")
+  let l:fullPath = g:workspace_session_directory . l:fileName
+  return l:fullPath
 endfunction
 
 function! s:GetSessionName()
