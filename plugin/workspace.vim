@@ -25,7 +25,10 @@ function! s:GetSessionDirectoryPath()
     call mkdir(g:workspace_session_directory)
   endif
   let l:cwd = getcwd()
-  let l:fileName = substitute(l:cwd, '/', '\%', 'g')
+  let l:fileName = substitute(l:cwd, '/', '%', 'g')
+  let l:fileNameTest = escape(l:fileName, '%')
+  echo 'fileName: ' . l:fileName
+  echo 'fileNameTest: ' . l:fileNameTest
   let l:fullPath = g:workspace_session_directory . l:fileName
   return l:fullPath
 endfunction
