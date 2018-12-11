@@ -26,9 +26,6 @@ function! s:GetSessionDirectoryPath()
   endif
   let l:cwd = getcwd()
   let l:fileName = substitute(l:cwd, '/', '%', 'g')
-  let l:fileNameTest = escape(l:fileName, '%')
-  echo 'fileName: ' . l:fileName
-  echo 'fileNameTest: ' . l:fileNameTest
   let l:fullPath = g:workspace_session_directory . l:fileName
   return l:fullPath
 endfunction
@@ -53,7 +50,7 @@ function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
     if s:IsSessionDirectoryUsed()
-      execute printf('mksession! %s', s:GetSessionDirectoryPath())
+      execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
     elseif s:IsAbsolutePath(g:workspace_session_name)
       execute printf('mksession! %s', g:workspace_session_name)
     else
@@ -127,7 +124,7 @@ function! s:LoadWorkspace()
     let s:workspace_save_session = 1
     let a:filename = expand(@%)
     if g:workspace_nocompatible | set nocompatible | endif
-    execute 'source ' . s:GetSessionName()
+    execute 'source ' . escape(s:GetSessionName(), '%')
     call s:ConfigureWorkspace()
     call s:FindOrNew(a:filename)
   else
