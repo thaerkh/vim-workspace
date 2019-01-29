@@ -11,6 +11,7 @@ let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_always = get(g:, 'workspace_autosave_always', 0)
 let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit', 'gitrebase', 'nerdtree'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
+let g:workspace_autosave_untrailtabs = get(g:, 'workspace_autosave_untrailtabs', 1)
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 3)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
@@ -146,6 +147,15 @@ function! s:UntrailSpaces()
   endif
 endfunction
 
+function! s:UntrailTabs()
+  if g:workspace_autosave_untrailtabs && &modifiable
+    let curr_row = line('.')
+    let curr_col = col('.')
+    execute 's/\t\+$//e'
+    cal cursor(curr_row, curr_col)
+  endif
+endfunction
+
 function! s:Autosave(timed)
   if index(g:workspace_autosave_ignore, &filetype) != -1 || &readonly || mode() == 'c' || pumvisible()
     return
@@ -159,6 +169,7 @@ function! s:Autosave(timed)
     let s:last_update = current_time
     checktime  " checktime with autoread will sync files on a last-writer-wins basis.
     call s:UntrailSpaces()
+    call s:UntrailTabs()
     silent! doautocmd BufWritePre %  " needed for soft checks
     silent! update  " only updates if there are changes to the file.
     if a:timed == 0 || s:time_delta >= g:workspace_autosave_au_updatetime
