@@ -61,30 +61,30 @@ function! s:MakeWorkspace(workspace_save_session)
 endfunction
 
 function! s:FindOrNew(filename)
-  let a:bufnr = bufnr(a:filename)
+  let l:bufnr = bufnr(a:filename)
   for tabnr in range(1, tabpagenr("$"))
     for bufnr in tabpagebuflist(tabnr)
-      if (bufnr == a:bufnr)
+      if (bufnr == l:bufnr)
         execute 'tabn ' . tabnr
-        call win_gotoid(win_findbuf(a:bufnr)[0])
+        call win_gotoid(win_findbuf(l:bufnr)[0])
         return
       endif
     endfor
   endfor
   tabnew
-  execute 'buffer ' . a:bufnr
+  execute 'buffer ' . l:bufnr
 endfunction
 
 function! s:CloseHiddenBuffers()
-  let a:visible_buffers = {}
+  let l:visible_buffers = {}
   for tabnr in range(1, tabpagenr('$'))
     for bufnr in tabpagebuflist(tabnr)
-      let a:visible_buffers[bufnr] = 1
+      let l:visible_buffers[bufnr] = 1
     endfor
   endfor
 
   for bufnr in range(1, bufnr('$'))
-    if bufexists(bufnr) && !has_key(a:visible_buffers,bufnr)
+    if bufexists(bufnr) && !has_key(l:visible_buffers,bufnr)
       execute printf('bwipeout %d', bufnr)
     endif
   endfor
@@ -123,11 +123,11 @@ function! s:LoadWorkspace()
 
   if s:WorkspaceExists()
     let s:workspace_save_session = 1
-    let a:filename = expand(@%)
+    let l:filename = expand(@%)
     if g:workspace_nocompatible | set nocompatible | endif
     execute 'source ' . escape(s:GetSessionName(), '%')
     call s:ConfigureWorkspace()
-    call s:FindOrNew(a:filename)
+    call s:FindOrNew(l:filename)
   else
     if g:workspace_autocreate
       call s:ToggleWorkspace()
