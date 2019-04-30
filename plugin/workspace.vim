@@ -76,15 +76,15 @@ function! s:FindOrNew(filename)
 endfunction
 
 function! s:CloseHiddenBuffers()
-  let a:visible_buffers = {}
+  let l:visible_buffers = {}
   for tabnr in range(1, tabpagenr('$'))
     for bufnr in tabpagebuflist(tabnr)
-      let a:visible_buffers[bufnr] = 1
+      let l:visible_buffers[bufnr] = 1
     endfor
   endfor
 
   for bufnr in range(1, bufnr('$'))
-    if bufexists(bufnr) && !has_key(a:visible_buffers,bufnr)
+    if bufexists(bufnr) && !has_key(l:visible_buffers,bufnr)
       execute printf('bwipeout %d', bufnr)
     endif
   endfor
