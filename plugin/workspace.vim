@@ -16,6 +16,7 @@ let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updateti
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
 let g:workspace_session_directory = get(g:, 'workspace_session_directory', '')
+let g:workspace_create_new_tabs = get(g:, 'workspace_create_new_tabs', 1)
 
 function! s:IsSessionDirectoryUsed()
   return !empty(g:workspace_session_directory)
@@ -71,7 +72,9 @@ function! s:FindOrNew(filename)
       endif
     endfor
   endfor
-  tabnew
+  if g:workspace_create_new_tabs
+    tabnew
+  endif
   execute 'buffer ' . l:fnr
 endfunction
 

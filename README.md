@@ -13,7 +13,10 @@
 
 Toggling the `ToggleWorkspace` command on will persistently track your session found in a current working directory, and all workspace features will be enabled. Conversely, toggling the command off will remove the session and disable the workspace features.
 
-If Vim is run with a file argument and it's already in the session's workspace, Vim will load the session and go to the tab window that contains it. Otherwise, it will be loaded as a new tab in the session.
+If Vim is run with a file argument and it's already in the session's workspace, Vim will load the session and go to the tab window that contains it. Otherwise, it will be loaded as a new tab in the session. If you would rather create a new buffer in the existing tab instead of creating a new tab:
+```
+let g:workspace_create_new_tabs = 0  " enabled = 1 (default), disabled = 0
+```
 
 It is recommended you bind this command to a convenient shortcut, such as the following:
 ```
