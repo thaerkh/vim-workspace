@@ -27,6 +27,12 @@ The following default can be configured if you wish to change the session name:
 let g:workspace_session_name = 'Session.vim'
 ```
 
+Use `g:workspace_session_directory` to save all your session files in a single directory outside of your workspace. Example:
+```
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+```
+Note: this will use the workspace directory as the session file name, overriding `g:workspace_sesssion_name`.
+
 If you'd like sessions to not load if you're explicitly loading a file in a workspace directory (as opposed to an argument-less `vim`), the following in your vimrc will provide that behaviour:
 ```
 let g:workspace_session_disable_on_args = 1

@@ -11,13 +11,37 @@ let g:workspace_autosave = get(g:, 'workspace_autosave', 1)
 let g:workspace_autosave_always = get(g:, 'workspace_autosave_always', 0)
 let g:workspace_autosave_ignore = get(g:, 'workspace_autosave_ignore', ['gitcommit', 'gitrebase', 'nerdtree'])
 let g:workspace_autosave_untrailspaces = get(g:, 'workspace_autosave_untrailspaces', 1)
+let g:workspace_autosave_untrailtabs = get(g:, 'workspace_autosave_untrailtabs', 1)
 let g:workspace_autosave_au_updatetime = get(g:, 'workspace_autosave_au_updatetime', 3)
 let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
-let g:workspace_create_new_tabs = get(g:, 'workspace_use_buffer', 1)
+let g:workspace_session_directory = get(g:, 'workspace_session_directory', '')
+let g:workspace_create_new_tabs = get(g:, 'workspace_create_new_tabs', 0)
+
+function! s:IsSessionDirectoryUsed()
+  return !empty(g:workspace_session_directory)
+endfunction
+
+function! s:GetSessionDirectoryPath()
+  if !isdirectory(g:workspace_session_directory)
+    call mkdir(g:workspace_session_directory)
+  endif
+  let l:cwd = getcwd()
+  let l:fileName = substitute(l:cwd, '/', '%', 'g')
+  let l:fullPath = g:workspace_session_directory . l:fileName
+  return l:fullPath
+endfunction
+
+function! s:GetSessionName()
+  if s:IsSessionDirectoryUsed()
+    return s:GetSessionDirectoryPath()
+  else
+    return g:workspace_session_name
+  endif
+endfunction
 
 function! s:WorkspaceExists()
-  return filereadable(g:workspace_session_name)
+  return filereadable(s:GetSessionName())
 endfunction
 
 function! s:IsAbsolutePath(path)
@@ -27,7 +51,9 @@ endfunction
 function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
-    if s:IsAbsolutePath(g:workspace_session_name)
+    if s:IsSessionDirectoryUsed()
+      execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
+    elseif s:IsAbsolutePath(g:workspace_session_name)
       execute printf('mksession! %s', g:workspace_session_name)
     else
       execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
@@ -36,32 +62,32 @@ function! s:MakeWorkspace(workspace_save_session)
 endfunction
 
 function! s:FindOrNew(filename)
-  let a:bufnr = bufnr(a:filename)
-  if g:workspace_create_new_tabs
-    for tabnr in range(1, tabpagenr("$"))
-      for bufnr in tabpagebuflist(tabnr)
-        if (bufnr == a:bufnr)
-          execute 'tabn ' . tabnr
-          call win_gotoid(win_findbuf(a:bufnr)[0])
-          return
-        endif
-      endfor
+  let l:fnr = bufnr(a:filename)
+  for tabnr in range(1, tabpagenr("$"))
+    for bufnr in tabpagebuflist(tabnr)
+      if (bufnr == l:fnr)
+        execute 'tabn ' . tabnr
+        call win_gotoid(win_findbuf(l:fnr)[0])
+        return
+      endif
     endfor
+  endfor
+  if g:workspace_create_new_tabs
     tabnew
   endif
-  execute 'buffer ' . a:bufnr
+  execute 'buffer ' . l:fnr
 endfunction
 
 function! s:CloseHiddenBuffers()
-  let a:visible_buffers = {}
+  let l:visible_buffers = {}
   for tabnr in range(1, tabpagenr('$'))
     for bufnr in tabpagebuflist(tabnr)
-      let a:visible_buffers[bufnr] = 1
+      let l:visible_buffers[bufnr] = 1
     endfor
   endfor
 
   for bufnr in range(1, bufnr('$'))
-    if bufexists(bufnr) && !has_key(a:visible_buffers,bufnr)
+    if bufexists(bufnr) && !has_key(l:visible_buffers,bufnr)
       execute printf('bwipeout %d', bufnr)
     endif
   endfor
@@ -74,7 +100,7 @@ endfunction
 
 function! s:RemoveWorkspace()
   let s:workspace_save_session  = 0
-  execute printf('call delete("%s")', g:workspace_session_name)
+  execute printf('call delete("%s")', s:GetSessionName())
   if !g:workspace_autosave_always
     call s:SetAutosave(0)
   endif
@@ -100,11 +126,11 @@ function! s:LoadWorkspace()
 
   if s:WorkspaceExists()
     let s:workspace_save_session = 1
-    let a:filename = expand(@%)
+    let l:filename = expand(@%)
     if g:workspace_nocompatible | set nocompatible | endif
-    execute 'source ' . g:workspace_session_name
+    execute 'source ' . escape(s:GetSessionName(), '%')
     call s:ConfigureWorkspace()
-    call s:FindOrNew(a:filename)
+    call s:FindOrNew(l:filename)
   else
     if g:workspace_autocreate
       call s:ToggleWorkspace()
@@ -124,6 +150,15 @@ function! s:UntrailSpaces()
   endif
 endfunction
 
+function! s:UntrailTabs()
+  if g:workspace_autosave_untrailtabs && &modifiable
+    let curr_row = line('.')
+    let curr_col = col('.')
+    execute 's/\t\+$//e'
+    cal cursor(curr_row, curr_col)
+  endif
+endfunction
+
 function! s:Autosave(timed)
   if index(g:workspace_autosave_ignore, &filetype) != -1 || &readonly || mode() == 'c' || pumvisible()
     return
@@ -137,6 +172,7 @@ function! s:Autosave(timed)
     let s:last_update = current_time
     checktime  " checktime with autoread will sync files on a last-writer-wins basis.
     call s:UntrailSpaces()
+    call s:UntrailTabs()
     silent! doautocmd BufWritePre %  " needed for soft checks
     silent! update  " only updates if there are changes to the file.
     if a:timed == 0 || s:time_delta >= g:workspace_autosave_au_updatetime
