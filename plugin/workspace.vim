@@ -193,7 +193,10 @@ function! s:SetAutosave(enable)
     set autoread
     set autowriteall
     set noswapfile
-    set updatetime=1000
+    " don't clobber lower settings by user
+    if s:updatetime >= 1000
+      set updatetime=1000 " limited to 1s as default to match localtime() trigger limitations,
+    endif
     if !has('nvim')
       let s:swapsync = &swapsync
       set swapsync=""
