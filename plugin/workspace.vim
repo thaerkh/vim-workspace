@@ -248,6 +248,7 @@ augroup Workspace
   au! VimEnter * nested call s:LoadWorkspace()
   au! StdinReadPost * let s:read_from_stdin = 1
   au! VimLeave * call s:MakeWorkspace(0)
+  au! UILeave * call s:MakeWorkspace(0)
   au! InsertLeave * if getcmdwintype() == '' && pumvisible() == 0|pclose|endif
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
