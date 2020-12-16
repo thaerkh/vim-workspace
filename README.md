@@ -74,10 +74,11 @@ If you would like to disable autosave for some reason (i.e. too much IO on disk)
 let g:workspace_autosave = 0
 ```
 
-#### Untrailing Spaces
-By default, all trailing spaces are trimmed before a buffer is autosaved. If you don't prefer this behaviour, add this line:
+#### Untrailing Spaces & Untrailing Tabs
+By default, all trailing spaces and tabs are trimmed before a buffer is autosaved. If you don't prefer this behaviour, add this line:
 ```
 let g:workspace_autosave_untrailspaces = 0
+let g:workspace_autosave_untrailtabs = 0
 ```
 
 #### Ignore List
