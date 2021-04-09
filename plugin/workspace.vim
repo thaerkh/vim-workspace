@@ -17,6 +17,7 @@ let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
 let g:workspace_session_directory = get(g:, 'workspace_session_directory', '')
 let g:workspace_create_new_tabs = get(g:, 'workspace_create_new_tabs', 1)
+let g:workspace_autosave_files = get(g:, 'workspace_autosave_files', [])
 
 function! s:IsSessionDirectoryUsed()
   return !empty(g:workspace_session_directory)
@@ -160,6 +161,11 @@ function! s:UntrailTabs()
 endfunction
 
 function! s:Autosave(timed)
+  " If autosave files list is not empty and file is not in list, don't autosave
+  if len(g:workspace_autosave_files) > 0 && index(g:workspace_autosave_files, &filetype) == -1
+    return
+  endif
+
   if index(g:workspace_autosave_ignore, &filetype) != -1 || &readonly || mode() == 'c' || pumvisible()
     return
   endif
