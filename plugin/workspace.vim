@@ -53,11 +53,11 @@ function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
     if s:IsSessionDirectoryUsed()
-      execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
+      execute silent! printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
     elseif s:IsAbsolutePath(g:workspace_session_name)
-      execute printf('mksession! %s', g:workspace_session_name)
+      execute silent! printf('mksession! %s', g:workspace_session_name)
     else
-      execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
+      execute silent! printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
     endif
   endif
 endfunction
@@ -253,7 +253,7 @@ endfunction
 augroup Workspace
   au! VimEnter * nested call s:LoadWorkspace()
   au! StdinReadPost * let s:read_from_stdin = 1
-  au! VimLeavePre * call s:MakeWorkspace(0)
+  au! VimLeave * call s:MakeWorkspace(0)
   au! InsertLeave * if getcmdwintype() == '' && pumvisible() == 0|pclose|endif
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
