@@ -53,11 +53,11 @@ function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
     if s:IsSessionDirectoryUsed()
-      execute silent! printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
+      silent! execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
     elseif s:IsAbsolutePath(g:workspace_session_name)
-      execute silent! printf('mksession! %s', g:workspace_session_name)
+      silent! execute printf('mksession! %s', g:workspace_session_name)
     else
-      execute silent! printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
+      silent! execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
     endif
   endif
 endfunction
