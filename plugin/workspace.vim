@@ -121,10 +121,6 @@ function! s:ToggleWorkspace()
 endfunction
 
 function! s:LoadWorkspace()
-  if len(g:workspace_autosave_files) > 0 && index(g:workspace_autosave_files, &filetype) == -1
-    return
-  endif
-
   if index(g:workspace_autosave_ignore, &filetype) != -1 || get(s:, 'read_from_stdin', 0) || (g:workspace_session_disable_on_args && argc() != 0)
     return
   endif
