@@ -50,7 +50,7 @@ function! s:IsAbsolutePath(path)
 endfunction
 
 function! s:MakeWorkspace(workspace_save_session)
-  if s:IsGitDir() == false
+  if s:IsGitDir() == 0
     return
   endif
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
@@ -69,9 +69,9 @@ endfunction
 function! s:IsGitDir()
   silent! !git rev-parse --is-inside-work-tree
   if v:shell_error == 0
-    return true
+    return 1
   else
-    return false
+    return 0
   endif
 endfunction
 
