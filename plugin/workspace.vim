@@ -50,7 +50,11 @@ function! s:IsAbsolutePath(path)
 endfunction
 
 function! s:MakeWorkspace(workspace_save_session)
+  if s:IsGitDir() == false
+    return
+  endif
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
+    "if not git repo, return
     let s:workspace_save_session = 1
     if s:IsSessionDirectoryUsed()
       silent! execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
@@ -59,6 +63,15 @@ function! s:MakeWorkspace(workspace_save_session)
     else
       silent! execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
     endif
+  endif
+endfunction
+
+function! s:IsGitDir()
+  silent! !git rev-parse --is-inside-work-tree
+  if v:shell_error == 0
+    return true
+  else
+    return false
   endif
 endfunction
 
