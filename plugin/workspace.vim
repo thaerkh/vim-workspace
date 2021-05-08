@@ -50,9 +50,6 @@ function! s:IsAbsolutePath(path)
 endfunction
 
 function! s:MakeWorkspace(workspace_save_session)
-  if s:IsGitDir() == 0
-    return
-  endif
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     "if not git repo, return
     let s:workspace_save_session = 1
@@ -121,6 +118,9 @@ function! s:RemoveWorkspace()
 endfunction
 
 function! s:ToggleWorkspace()
+  if s:IsGitDir() == 0
+    return
+  endif
   if s:WorkspaceExists()
     call s:RemoveWorkspace()
     execute printf('silent !rm -rf %s', g:workspace_undodir)
@@ -278,5 +278,3 @@ augroup END
 command! ToggleAutosave call s:ToggleAutosave()
 command! ToggleWorkspace call s:ToggleWorkspace()
 command! CloseHiddenBuffers call s:CloseHiddenBuffers()
-
-" vim: ts=2 sw=2 et
