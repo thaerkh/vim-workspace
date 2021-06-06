@@ -248,7 +248,11 @@ augroup Workspace
   au! VimEnter * nested call s:LoadWorkspace()
   au! StdinReadPost * let s:read_from_stdin = 1
   au! VimLeave * call s:MakeWorkspace(0)
-  au! InsertLeave * if getcmdwintype() == '' && pumvisible() == 0|pclose|endif
+  if exists('*getcmdwintype')
+    au! InsertLeave * if empty(getcmdwintype()) && pumvisible() == 0|pclose|endif
+  else
+    au! InsertLeave * if pumvisible() == 0|pclose|endif
+  endif
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
 
