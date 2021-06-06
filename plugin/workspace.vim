@@ -253,6 +253,9 @@ augroup Workspace
   else
     au! InsertLeave * if pumvisible() == 0|pclose|endif
   endif
+  if has('nvim')
+    au! UILeave * nested call s:MakeWorkspace(0)
+  endif
   au! SessionLoadPost * call s:PostLoadCleanup()
 augroup END
 
