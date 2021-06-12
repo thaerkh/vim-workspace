@@ -18,6 +18,7 @@ let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
 let g:workspace_session_directory = get(g:, 'workspace_session_directory', '')
 let g:workspace_create_new_tabs = get(g:, 'workspace_create_new_tabs', 1)
 let g:workspace_autosave_files = get(g:, 'workspace_autosave_files', [])
+let g:workspace_only_git_dir = get(g:, 'workspace_only_git_dir', 0)
 
 function! s:IsSessionDirectoryUsed()
   return !empty(g:workspace_session_directory)
@@ -51,7 +52,6 @@ endfunction
 
 function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
-    "if not git repo, return
     let s:workspace_save_session = 1
     if s:IsSessionDirectoryUsed()
       silent! execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
@@ -118,11 +118,9 @@ function! s:RemoveWorkspace()
 endfunction
 
 function! s:ToggleWorkspace()
-  if s:IsGitDir() == 0
-    echo 'not a git repo'
+  if g:workspace_only_git_dir == 1 && s:IsGitDir() == 0 
     return
   endif
-  echo 'git repo'
   if s:WorkspaceExists()
     call s:RemoveWorkspace()
     execute printf('silent !rm -rf %s', g:workspace_undodir)
