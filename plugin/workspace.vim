@@ -119,8 +119,10 @@ endfunction
 
 function! s:ToggleWorkspace()
   if s:IsGitDir() == 0
+    echo 'not a git repo'
     return
   endif
+  echo 'git repo'
   if s:WorkspaceExists()
     call s:RemoveWorkspace()
     execute printf('silent !rm -rf %s', g:workspace_undodir)
