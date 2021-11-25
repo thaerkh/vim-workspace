@@ -17,6 +17,8 @@ let g:workspace_autocreate = get(g:, 'workspace_autocreate', 0)
 let g:workspace_nocompatible = get(g:, 'workspace_nocompatible', 1)
 let g:workspace_session_directory = get(g:, 'workspace_session_directory', '')
 let g:workspace_create_new_tabs = get(g:, 'workspace_create_new_tabs', 1)
+let g:workspace_autosave_files = get(g:, 'workspace_autosave_files', [])
+let g:workspace_only_git_dir = get(g:, 'workspace_only_git_dir', 0)
 
 function! s:IsSessionDirectoryUsed()
   return !empty(g:workspace_session_directory)
@@ -52,12 +54,21 @@ function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
     if s:IsSessionDirectoryUsed()
-      execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
+      silent! execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
     elseif s:IsAbsolutePath(g:workspace_session_name)
-      execute printf('mksession! %s', g:workspace_session_name)
+      silent! execute printf('mksession! %s', g:workspace_session_name)
     else
-      execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
+      silent! execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
     endif
+  endif
+endfunction
+
+function! s:IsGitDir()
+  silent! !git rev-parse --is-inside-work-tree
+  if v:shell_error == 0
+    return 1
+  else
+    return 0
   endif
 endfunction
 
@@ -107,6 +118,9 @@ function! s:RemoveWorkspace()
 endfunction
 
 function! s:ToggleWorkspace()
+  if g:workspace_only_git_dir == 1 && s:IsGitDir() == 0 
+    return
+  endif
   if s:WorkspaceExists()
     call s:RemoveWorkspace()
     execute printf('silent !rm -rf %s', g:workspace_undodir)
@@ -160,6 +174,11 @@ function! s:UntrailTabs()
 endfunction
 
 function! s:Autosave(timed)
+  " If autosave files list is not empty and file is not in list, don't autosave
+  if len(g:workspace_autosave_files) > 0 && index(g:workspace_autosave_files, &filetype) == -1
+    return
+  endif
+
   if index(g:workspace_autosave_ignore, &filetype) != -1 || &readonly || mode() == 'c' || pumvisible()
     return
   endif
@@ -266,5 +285,3 @@ augroup END
 command! ToggleAutosave call s:ToggleAutosave()
 command! ToggleWorkspace call s:ToggleWorkspace()
 command! CloseHiddenBuffers call s:CloseHiddenBuffers()
-
-" vim: ts=2 sw=2 et
