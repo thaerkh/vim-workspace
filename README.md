@@ -1,3 +1,5 @@
+<strong>Note:</strong> This plugin is considered feature complete, and is no longer being maintained.
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/logo.png" height="220">
 </p>
