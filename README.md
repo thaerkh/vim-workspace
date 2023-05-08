@@ -1,5 +1,13 @@
-<strong>Note:</strong> This plugin is considered feature complete, and is no longer being maintained.
-
+```diff
+- Note: This plugin is considered feature complete, and is no longer being maintained.
+```
+```vim
+" Feel free to use this alternative to the plugin's core autosave and session management features:
+au BufLeave,CursorHold,CursorHoldi,FocusLost * if (&buftype == '') | do BufWritePre | silent! update | endif
+au VimEnter * nested if (len(v:argv) == 2) | silent! source Session.vim | mksession! | endif
+au VimLeave * if (len(v:argv) == 2) | mksession! | endif
+```
+---
 <p align="center">
 <img src="https://raw.githubusercontent.com/thaerkh/vim-workspace/master/wiki/screenshots/logo.png" height="220">
 </p>
