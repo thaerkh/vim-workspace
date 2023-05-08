@@ -3,9 +3,11 @@
 ```
 ```vim
 " Feel free to use this alternative to the plugin's core autosave and session management features:
-au BufLeave,CursorHold,CursorHoldi,FocusLost * if (&buftype == '') | do BufWritePre | silent! update | endif
-au VimEnter * nested if (len(v:argv) == 2) | silent! source Session.vim | mksession! | endif
-au VimLeave * if (len(v:argv) == 2) | mksession! | endif
+au BufLeave,CursorHold,CursorHoldi,FocusLost * if (&buftype == '') | do BufWritePre | silent! update | do BufWritePost | endif
+au VimEnter * nested if (len(v:argv) == 1) | silent! source Session.vim | mksession! | endif
+au VimLeave * if (len(v:argv) == 1) | mksession! | endif
+" v:argv length check may need to be 2 if using Neovim since it includes an --embed argument on launch
+" v:argv doubles for both stdin and argful cases (instead of argc() and a StdinReadPre autocmd flag)
 ```
 ---
 <p align="center">
