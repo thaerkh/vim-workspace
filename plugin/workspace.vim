@@ -53,12 +53,17 @@ endfunction
 function! s:MakeWorkspace(workspace_save_session)
   if a:workspace_save_session == 1 || get(s:, 'workspace_save_session', 0) == 1
     let s:workspace_save_session = 1
+    let l:nerd_tree = g:NERDTree.IsOpen()
+    NERDTreeTabsClose
     if s:IsSessionDirectoryUsed()
       silent! execute printf('mksession! %s', escape(s:GetSessionDirectoryPath(), '%'))
     elseif s:IsAbsolutePath(g:workspace_session_name)
       silent! execute printf('mksession! %s', g:workspace_session_name)
     else
       silent! execute printf('mksession! %s/%s', getcwd(), g:workspace_session_name)
+    endif
+    if l:nerd_tree
+      NERDTreeTabsOpen
     endif
   endif
 endfunction
@@ -183,6 +188,9 @@ function! s:Autosave(timed)
     return
   endif
 
+  let l:nerd_tree = g:NERDTree.IsOpen()
+  NERDTreeTabsClose
+
   let current_time = localtime()
   let s:last_update = get(s:, 'last_update', 0)
   let s:time_delta = current_time - s:last_update
@@ -197,6 +205,10 @@ function! s:Autosave(timed)
     if a:timed == 0 || s:time_delta >= g:workspace_autosave_au_updatetime
       silent! doautocmd BufWritePost %  " Periodically trigger BufWritePost.
     endif
+  endif
+
+  if l:nerd_tree
+    NERDTreeTabsOpen
   endif
 endfunction
 
